@@ -1,5 +1,10 @@
 unit main;
 
+{
+ Ollivier Civiol - 2019
+ ollivier@civiol.eu
+ https://ollivierciviolsoftware.wordpress.com/
+}
 {$MODE Delphi}
 
 interface

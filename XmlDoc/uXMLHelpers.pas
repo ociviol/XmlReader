@@ -1,5 +1,10 @@
 unit uXMLHelpers;
 
+{
+ Ollivier Civiol - 2019
+ ollivier@civiol.eu
+ https://ollivierciviolsoftware.wordpress.com/
+}
 interface
 
 uses
