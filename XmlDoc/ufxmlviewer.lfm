@@ -1,0 +1,430 @@
+object FxmlView: TFxmlView
+  Left = 0
+  Height = 768
+  Top = 0
+  Width = 1218
+  ClientHeight = 768
+  ClientWidth = 1218
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  ParentFont = False
+  TabOrder = 0
+  TabStop = True
+  DesignLeft = 452
+  DesignTop = 197
+  object Panel2: TPanel
+    Left = 0
+    Height = 728
+    Top = 40
+    Width = 1218
+    Align = alClient
+    ClientHeight = 728
+    ClientWidth = 1218
+    TabOrder = 0
+    object Splitter3: TSplitter
+      Cursor = crVSplit
+      Left = 1
+      Height = 4
+      Top = 1
+      Width = 1216
+      Align = alTop
+      ResizeAnchor = akTop
+    end
+    object Panel3: TPanel
+      Left = 1
+      Height = 694
+      Top = 5
+      Width = 1216
+      Align = alClient
+      ClientHeight = 694
+      ClientWidth = 1216
+      TabOrder = 0
+      object Splitter1: TSplitter
+        Left = 765
+        Height = 692
+        Top = 1
+        Width = 5
+        Align = alRight
+        ResizeAnchor = akRight
+      end
+      object TreeView1: TTreeView
+        Left = 1
+        Height = 692
+        Top = 1
+        Width = 764
+        Align = alClient
+        DefaultItemHeight = 18
+        DragMode = dmAutomatic
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        HideSelection = False
+        Indent = 19
+        ParentFont = False
+        ParentShowHint = False
+        PopupMenu = PopupMenu1
+        ReadOnly = True
+        TabOrder = 0
+        OnChange = TreeView1Change
+        OnDragDrop = TreeView1DragDrop
+        OnDragOver = TreeView1DragOver
+        Options = [tvoAutoItemHeight, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+      end
+      object pnlAttrib: TPanel
+        Left = 770
+        Height = 692
+        Top = 1
+        Width = 445
+        Align = alRight
+        BevelOuter = bvLowered
+        ClientHeight = 692
+        ClientWidth = 445
+        TabOrder = 1
+        object Splitter2: TSplitter
+          Cursor = crVSplit
+          Left = 1
+          Height = 4
+          Top = 253
+          Width = 443
+          Align = alTop
+          ResizeAnchor = akTop
+        end
+        object Panel4: TPanel
+          Left = 1
+          Height = 252
+          Top = 1
+          Width = 443
+          Align = alTop
+          BevelOuter = bvNone
+          ClientHeight = 252
+          ClientWidth = 443
+          TabOrder = 0
+          object AttrGrid: TStringGrid
+            Left = 0
+            Height = 252
+            Top = 0
+            Width = 443
+            Align = alClient
+            ColCount = 2
+            DefaultColWidth = 120
+            DefaultRowHeight = 18
+            FixedRows = 0
+            Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing, goEditing, goThumbTracking]
+            ParentShowHint = False
+            PopupMenu = PopupMenu3
+            RowCount = 2
+            TabOrder = 0
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Tahoma'
+            OnSelectCell = AttrGridSelectCell
+            OnSetEditText = AttrGridSetEditText
+            ColWidths = (
+              120
+              274
+            )
+          end
+        end
+        object Panel5: TPanel
+          Left = 1
+          Height = 35
+          Top = 257
+          Width = 443
+          Align = alTop
+          BevelOuter = bvNone
+          ClientHeight = 35
+          ClientWidth = 443
+          TabOrder = 1
+          object edtSearchMemo: TEdit
+            Left = 7
+            Height = 21
+            Top = 6
+            Width = 354
+            Anchors = [akTop, akLeft, akRight, akBottom]
+            Enabled = False
+            OnChange = edtSearchMemoChange
+            OnEnter = edtSearchMemoEnter
+            TabOrder = 0
+          end
+          object btnSearchMemo: TButton
+            Left = 367
+            Height = 25
+            Top = 4
+            Width = 75
+            Anchors = [akTop, akRight]
+            Caption = 'Search'
+            Enabled = False
+            OnClick = btnSearchMemoClick
+            TabOrder = 1
+          end
+        end
+        inline SynMemo1: TSynMemo
+          Cursor = crIBeam
+          Left = 1
+          Height = 399
+          Top = 292
+          Width = 443
+          Align = alClient
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Courier New'
+          Font.Pitch = fpFixed
+          Font.Quality = fqNonAntialiased
+          ParentColor = False
+          ParentFont = False
+          ParentShowHint = False
+          PopupMenu = PopupMenu2
+          ShowHint = True
+          TabOrder = 2
+          Gutter.Visible = False
+          Gutter.Width = 57
+          Gutter.MouseActions = <>
+          Highlighter = SynSQLSyn1
+          Keystrokes = <>
+          MouseActions = <>
+          MouseSelActions = <>
+          ReadOnly = True
+          RightEdge = 120
+          SelectedColor.FrameEdges = sfeAround
+          SelectedColor.BackPriority = 50
+          SelectedColor.ForePriority = 50
+          SelectedColor.FramePriority = 50
+          SelectedColor.BoldPriority = 50
+          SelectedColor.ItalicPriority = 50
+          SelectedColor.UnderlinePriority = 50
+          SelectedColor.StrikeOutPriority = 50
+          inline SynLeftGutterPartList1: TSynGutterPartList
+            object SynGutterMarks1: TSynGutterMarks
+              Width = 24
+              MouseActions = <>
+            end
+            object SynGutterLineNumber1: TSynGutterLineNumber
+              Width = 17
+              MouseActions = <>
+              MarkupInfo.Background = clBtnFace
+              MarkupInfo.Foreground = clNone
+              MarkupInfo.FrameEdges = sfeAround
+              DigitCount = 2
+              ShowOnlyLineNumbersMultiplesOf = 1
+              ZeroStart = False
+              LeadingZeros = False
+            end
+            object SynGutterChanges1: TSynGutterChanges
+              Width = 4
+              MouseActions = <>
+              ModifiedColor = 59900
+              SavedColor = clGreen
+            end
+            object SynGutterSeparator1: TSynGutterSeparator
+              Width = 2
+              MouseActions = <>
+              MarkupInfo.Background = clWhite
+              MarkupInfo.Foreground = clGray
+              MarkupInfo.FrameEdges = sfeAround
+            end
+            object SynGutterCodeFolding1: TSynGutterCodeFolding
+              MouseActions = <>
+              MarkupInfo.Background = clNone
+              MarkupInfo.Foreground = clGray
+              MarkupInfo.FrameEdges = sfeAround
+              MouseActionsExpanded = <>
+              MouseActionsCollapsed = <>
+            end
+          end
+        end
+      end
+    end
+    object StatusBar1: TStatusBar
+      Left = 1
+      Height = 28
+      Top = 699
+      Width = 1216
+      Panels = <>
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 40
+    Top = 0
+    Width = 1218
+    Align = alTop
+    ClientHeight = 40
+    ClientWidth = 1218
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 10
+      Height = 13
+      Top = 10
+      Width = 25
+      Caption = 'Tag :'
+      Color = clBtnFace
+      ParentColor = False
+      Transparent = False
+    end
+    object Label3: TLabel
+      Left = 286
+      Height = 13
+      Top = 11
+      Width = 29
+      Caption = 'Text :'
+      Color = clBtnFace
+      ParentColor = False
+      Transparent = False
+    end
+    object edtTag: TEdit
+      Left = 48
+      Height = 21
+      Top = 8
+      Width = 151
+      OnChange = edtTagChange
+      OnEnter = edtTagEnter
+      TabOrder = 0
+    end
+    object btnSearchTag: TButton
+      Left = 204
+      Height = 21
+      Top = 8
+      Width = 61
+      Caption = 'Search'
+      Enabled = False
+      OnClick = btnSearchTagClick
+      TabOrder = 1
+    end
+    object edtText: TEdit
+      Left = 326
+      Height = 21
+      Top = 8
+      Width = 200
+      OnChange = edtTextChange
+      OnEnter = edtTextEnter
+      TabOrder = 2
+    end
+    object btnSearchText: TButton
+      Left = 534
+      Height = 21
+      Top = 8
+      Width = 61
+      Caption = 'Search'
+      Enabled = False
+      OnClick = btnSearchTextClick
+      TabOrder = 3
+    end
+    object btnApply: TButton
+      Left = 1684
+      Height = 25
+      Top = 6
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Apply'
+      Enabled = False
+      TabOrder = 4
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
+    left = 168
+    top = 320
+    object mnuCopy: TMenuItem
+      Caption = 'Copy XML (text)'
+      OnClick = mnuCopyClick
+    end
+    object mnuCopyNodePath: TMenuItem
+      Caption = 'Copy Node Path (text)'
+      OnClick = mnuCopyNodePathClick
+    end
+    object N2: TMenuItem
+      Caption = '-'
+    end
+    object mnuCopyNode: TMenuItem
+      Caption = 'Copy Node (non text)'
+      OnClick = mnuCopyNodeClick
+    end
+    object mnuPasteNode: TMenuItem
+      Caption = 'Paste node (non text)'
+      OnClick = mnuPasteNodeClick
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object MnuInsert: TMenuItem
+      Caption = 'Insert Node'
+      OnClick = MnuInsertClick
+    end
+    object mnuDeleteNode: TMenuItem
+      Caption = 'Delete Node'
+      OnClick = mnuDeleteNodeClick
+    end
+    object mnuDuplicateNode: TMenuItem
+      Caption = 'Duplicate node'
+      OnClick = mnuDuplicateNodeClick
+    end
+    object mnuRenameNode: TMenuItem
+      Caption = 'Rename Node'
+      OnClick = mnuRenameNodeClick
+    end
+  end
+  object SynSQLSyn1: TSynSQLSyn
+    DefaultFilter = 'SQL Files (*.sql)|*.sql'
+    Enabled = False
+    CommentAttri.Foreground = clGreen
+    CommentAttri.FrameEdges = sfeAround
+    DataTypeAttri.Foreground = clLime
+    DataTypeAttri.FrameEdges = sfeAround
+    DefaultPackageAttri.FrameEdges = sfeAround
+    ExceptionAttri.FrameEdges = sfeAround
+    FunctionAttri.FrameEdges = sfeAround
+    IdentifierAttri.Foreground = clMenuHighlight
+    IdentifierAttri.FrameEdges = sfeAround
+    KeyAttri.Foreground = clMaroon
+    KeyAttri.FrameEdges = sfeAround
+    NumberAttri.Foreground = clOlive
+    NumberAttri.FrameEdges = sfeAround
+    PLSQLAttri.FrameEdges = sfeAround
+    SpaceAttri.FrameEdges = sfeAround
+    SQLPlusAttri.FrameEdges = sfeAround
+    StringAttri.Foreground = clNavy
+    StringAttri.FrameEdges = sfeAround
+    SymbolAttri.Foreground = clRed
+    SymbolAttri.FrameEdges = sfeAround
+    TableNameAttri.Foreground = clTeal
+    TableNameAttri.FrameEdges = sfeAround
+    VariableAttri.FrameEdges = sfeAround
+    SQLDialect = sqlSybase
+    left = 392
+    top = 360
+  end
+  object PopupMenu2: TPopupMenu
+    OnPopup = PopupMenu2Popup
+    left = 632
+    top = 424
+    object mnuCopyMemo: TMenuItem
+      Caption = 'Copy'
+      OnClick = mnuCopyMemoClick
+    end
+    object Wordwrap1: TMenuItem
+      Caption = 'Wordwrap'
+      OnClick = Wordwrap1Click
+    end
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.xml'
+    FileName = 'Untitled.xml'
+    Filter = 'XML files|.xml'
+    left = 352
+    top = 264
+  end
+  object PopupMenu3: TPopupMenu
+    OnPopup = PopupMenu3Popup
+    left = 624
+    top = 176
+    object mnuAddAttribute: TMenuItem
+      Caption = 'Add attribute'
+      OnClick = mnuAddAttributeClick
+    end
+    object mnuRemoveAttribute: TMenuItem
+      Caption = 'Remove attribute'
+      OnClick = mnuRemoveAttributeClick
+    end
+  end
+end

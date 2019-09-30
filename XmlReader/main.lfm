@@ -1,0 +1,117 @@
+object FXmlViewer: TFXmlViewer
+  Left = 550
+  Height = 755
+  Top = 192
+  Width = 914
+  Caption = 'XMLReader'
+  ClientHeight = 725
+  ClientWidth = 914
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Menu = MainMenu1
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.2.2.0'
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 725
+    Top = 0
+    Width = 914
+    Align = alClient
+    PopupMenu = PopupMenu1
+    TabOrder = 0
+  end
+  object OpenDialog1: TOpenDialog
+    Title = 'Open Xml file'
+    Filter = 'XML Files|*.xml'
+    left = 107
+    top = 110
+  end
+  object MainMenu1: TMainMenu
+    left = 200
+    top = 120
+    object MenuItem1: TMenuItem
+      Caption = 'File'
+      OnClick = MenuItem1Click
+      object mnuOpenXml: TMenuItem
+        Caption = 'Open...'
+        ShortCut = 16463
+        OnClick = mnuOpenXmlClick
+      end
+      object Save1: TMenuItem
+        Caption = 'Save'
+        Enabled = False
+        OnClick = Save1Click
+      end
+      object MenuItem2: TMenuItem
+        Caption = 'Save As...'
+        ShortCut = 16467
+        OnClick = MenuItem2Click
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object mnuQuit: TMenuItem
+        Caption = 'Quit'
+        ShortCut = 16472
+        OnClick = mnuQuitClick
+      end
+    end
+    object Edit1: TMenuItem
+      Caption = '&Edit'
+      object Loadfromclipboard1: TMenuItem
+        Caption = 'Load XML from clipboard'
+        ShortCut = 16470
+        OnClick = Loadfromclipboard1Click
+      end
+      object Copytoclipboard1: TMenuItem
+        Caption = 'Copy to clipboard'
+        ShortCut = 16451
+        OnClick = Copytoclipboard1Click
+      end
+    end
+    object mnuTabs1: TMenuItem
+      Caption = '&Tabs'
+      OnClick = mnutab1Click
+      object New1: TMenuItem
+        Caption = 'New'
+        ShortCut = 16462
+        OnClick = New1Click
+      end
+      object mnuClose1: TMenuItem
+        Caption = '&Close'
+        ShortCut = 16459
+        OnClick = mnuClose1Click
+      end
+    end
+    object N1: TMenuItem
+      Caption = '?'
+      object About1: TMenuItem
+        Caption = 'About...'
+        ShortCut = 112
+        OnClick = About1Click
+      end
+    end
+  end
+  object SaveDialog1: TSaveDialog
+    OnShow = SaveDialog1Show
+    Filter = '.xml'
+    Options = [ofHideReadOnly, ofPathMustExist, ofNoReadOnlyReturn, ofEnableSizing]
+    left = 144
+    top = 179
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = mnutab1Click
+    left = 288
+    top = 136
+    object mnuClose2: TMenuItem
+      Caption = '&Close'
+      OnClick = mnuClose1Click
+    end
+  end
+end
