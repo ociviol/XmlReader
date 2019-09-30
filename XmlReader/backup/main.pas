@@ -169,6 +169,7 @@ begin
   finally
     Free;
   end;
+  Caption := S_CAPTION;
   SetAppCaption;
 end;
 

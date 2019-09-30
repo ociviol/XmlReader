@@ -1337,11 +1337,7 @@ end;
 function TXMLDoc.GetReader:TXMLReader;
 begin
   result := TXMLReader.Create;
-  with result.ReaderSettings do
-  begin
-    ErrorHandling := ehRaise;
-    StrictXML := False;
-  end;
+  result.ReaderSettings.ErrorHandling := ehRaise;
 end;
 
 function TXMLDoc.GetWriter:TXMLWriter;

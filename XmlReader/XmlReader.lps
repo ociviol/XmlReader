@@ -20,8 +20,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
-        <CursorPos X="21" Y="10"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="156"/>
+        <CursorPos Y="172"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -42,7 +43,8 @@
         <Filename Value="..\XmlDoc\uxmldoc.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="18" Y="11"/>
+        <TopLine Value="1323"/>
+        <CursorPos X="7" Y="1344"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -86,14 +88,15 @@
       </Unit9>
       <Unit10>
         <Filename Value="..\XmlDoc\OXmlReadWrite.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="598"/>
-        <CursorPos X="26" Y="597"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="435"/>
+        <CursorPos X="23" Y="454"/>
         <UsageCount Value="11"/>
         <Bookmarks Count="2">
           <Item0 X="37" Y="584" ID="1"/>
           <Item1 X="10" Y="593" ID="2"/>
         </Bookmarks>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit10>
       <Unit11>
@@ -111,11 +114,62 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit12>
     </Units>
-    <JumpHistory Count="1">
+    <JumpHistory Count="14" HistoryIndex="13">
       <Position1>
         <Filename Value="..\XmlDoc\uxmldoc.pas"/>
         <Caret Line="11" Column="18"/>
       </Position1>
+      <Position2>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="22" Column="22" TopLine="10"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="154" Column="24" TopLine="126"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="154" Column="22" TopLine="135"/>
+      </Position4>
+      <Position5>
+        <Filename Value="main.pas"/>
+        <Caret Line="70" Column="15" TopLine="47"/>
+      </Position5>
+      <Position6>
+        <Filename Value="main.pas"/>
+        <Caret Line="177" Column="17" TopLine="149"/>
+      </Position6>
+      <Position7>
+        <Filename Value="main.pas"/>
+        <Caret Line="213" Column="14" TopLine="196"/>
+      </Position7>
+      <Position8>
+        <Filename Value="main.pas"/>
+      </Position8>
+      <Position9>
+        <Filename Value="main.pas"/>
+        <Caret Line="13" Column="5"/>
+      </Position9>
+      <Position10>
+        <Filename Value="main.pas"/>
+        <Caret Line="85" Column="43" TopLine="56"/>
+      </Position10>
+      <Position11>
+        <Filename Value="main.pas"/>
+        <Caret Line="213" Column="70" TopLine="198"/>
+      </Position11>
+      <Position12>
+        <Filename Value="main.pas"/>
+        <Caret Line="271" Column="66" TopLine="240"/>
+      </Position12>
+      <Position13>
+        <Filename Value="main.pas"/>
+        <Caret Line="15"/>
+      </Position13>
+      <Position14>
+        <Filename Value="main.pas"/>
+        <Caret Line="98" TopLine="81"/>
+      </Position14>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
