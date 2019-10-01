@@ -11,7 +11,10 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  Windows, Messages, Menus, ExtCtrls, Grids, ufxmlviewer;
+{$ifdef MsWindows}
+  Windows, Messages,
+{$endif}
+  Menus, ExtCtrls, Grids, ufxmlviewer;
 
 type
 
@@ -210,8 +213,10 @@ end;
 
 procedure TFXmlViewer.FormShow(Sender: TObject);
 begin
+{$ifdef MsWindows}
   if ParamCount > 0 then
     PostMessage(handle, WM_USER + 2, 0, 0);
+{$endif}
 end;
 
 function TFXmlViewer.AddNewXmlreader: TFxmlView;

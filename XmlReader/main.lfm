@@ -1,10 +1,10 @@
 object FXmlViewer: TFXmlViewer
-  Left = 550
+  Left = 526
   Height = 755
-  Top = 192
+  Top = 115
   Width = 914
   Caption = 'XMLReader'
-  ClientHeight = 735
+  ClientHeight = 732
   ClientWidth = 914
   Color = clBtnFace
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object FXmlViewer: TFXmlViewer
   LCLVersion = '2.0.4.0'
   object PageControl1: TPageControl
     Left = 0
-    Height = 735
+    Height = 732
     Top = 0
     Width = 914
     Align = alClient
