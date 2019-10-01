@@ -19,7 +19,6 @@
         <ComponentName Value="FXmlViewer"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="156"/>
         <CursorPos Y="172"/>
@@ -34,9 +33,13 @@
         <ComponentName Value="FxmlView"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <TopLine Value="76"/>
-        <CursorPos X="13" Y="91"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="74"/>
+        <CursorPos X="56" Y="94"/>
         <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit2>
       <Unit3>
@@ -114,7 +117,7 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit12>
     </Units>
-    <JumpHistory Count="14" HistoryIndex="13">
+    <JumpHistory Count="15" HistoryIndex="14">
       <Position1>
         <Filename Value="..\XmlDoc\uxmldoc.pas"/>
         <Caret Line="11" Column="18"/>
@@ -170,6 +173,10 @@
         <Filename Value="main.pas"/>
         <Caret Line="98" TopLine="81"/>
       </Position14>
+      <Position15>
+        <Filename Value="main.pas"/>
+        <Caret Line="172" TopLine="156"/>
+      </Position15>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

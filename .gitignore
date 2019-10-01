@@ -67,3 +67,4 @@ __recovery/
 *.bak
 *.ppu
 *.obj
+XmlReader/out/*
