@@ -1,48 +1,48 @@
 object FxmlView: TFxmlView
   Left = 0
-  Height = 768
+  Height = 566
   Top = 0
-  Width = 1218
-  ClientHeight = 768
-  ClientWidth = 1218
+  Width = 932
+  ClientHeight = 566
+  ClientWidth = 932
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   ParentFont = False
   TabOrder = 0
   TabStop = True
-  DesignLeft = 452
-  DesignTop = 197
+  DesignLeft = 243
+  DesignTop = 211
   object Panel2: TPanel
     Left = 0
-    Height = 728
+    Height = 526
     Top = 40
-    Width = 1218
+    Width = 932
     Align = alClient
-    ClientHeight = 728
-    ClientWidth = 1218
+    ClientHeight = 526
+    ClientWidth = 932
     TabOrder = 0
     object Splitter3: TSplitter
       Cursor = crVSplit
       Left = 1
       Height = 4
       Top = 1
-      Width = 1216
+      Width = 930
       Align = alTop
       ResizeAnchor = akTop
     end
     object Panel3: TPanel
       Left = 1
-      Height = 694
+      Height = 499
       Top = 5
-      Width = 1216
+      Width = 930
       Align = alClient
-      ClientHeight = 694
-      ClientWidth = 1216
+      ClientHeight = 499
+      ClientWidth = 930
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 765
-        Height = 692
+        Left = 479
+        Height = 497
         Top = 1
         Width = 5
         Align = alRight
@@ -50,11 +50,10 @@ object FxmlView: TFxmlView
       end
       object TreeView1: TTreeView
         Left = 1
-        Height = 692
+        Height = 497
         Top = 1
-        Width = 764
+        Width = 478
         Align = alClient
-        DefaultItemHeight = 18
         DragMode = dmAutomatic
         Font.Color = clWindowText
         Font.Height = -13
@@ -72,13 +71,13 @@ object FxmlView: TFxmlView
         Options = [tvoAutoItemHeight, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
       end
       object pnlAttrib: TPanel
-        Left = 770
-        Height = 692
+        Left = 484
+        Height = 497
         Top = 1
         Width = 445
         Align = alRight
         BevelOuter = bvLowered
-        ClientHeight = 692
+        ClientHeight = 497
         ClientWidth = 445
         TabOrder = 1
         object Splitter2: TSplitter
@@ -162,7 +161,7 @@ object FxmlView: TFxmlView
         inline SynMemo1: TSynMemo
           Cursor = crIBeam
           Left = 1
-          Height = 399
+          Height = 204
           Top = 292
           Width = 443
           Align = alClient
@@ -183,10 +182,11 @@ object FxmlView: TFxmlView
           Highlighter = SynSQLSyn1
           Keystrokes = <>
           MouseActions = <>
+          MouseTextActions = <>
           MouseSelActions = <>
+          VisibleSpecialChars = [vscSpace, vscTabAtLast]
           ReadOnly = True
           RightEdge = 120
-          SelectedColor.FrameEdges = sfeAround
           SelectedColor.BackPriority = 50
           SelectedColor.ForePriority = 50
           SelectedColor.FramePriority = 50
@@ -204,7 +204,6 @@ object FxmlView: TFxmlView
               MouseActions = <>
               MarkupInfo.Background = clBtnFace
               MarkupInfo.Foreground = clNone
-              MarkupInfo.FrameEdges = sfeAround
               DigitCount = 2
               ShowOnlyLineNumbersMultiplesOf = 1
               ZeroStart = False
@@ -221,13 +220,11 @@ object FxmlView: TFxmlView
               MouseActions = <>
               MarkupInfo.Background = clWhite
               MarkupInfo.Foreground = clGray
-              MarkupInfo.FrameEdges = sfeAround
             end
             object SynGutterCodeFolding1: TSynGutterCodeFolding
               MouseActions = <>
               MarkupInfo.Background = clNone
               MarkupInfo.Foreground = clGray
-              MarkupInfo.FrameEdges = sfeAround
               MouseActionsExpanded = <>
               MouseActionsCollapsed = <>
             end
@@ -237,9 +234,9 @@ object FxmlView: TFxmlView
     end
     object StatusBar1: TStatusBar
       Left = 1
-      Height = 28
-      Top = 699
-      Width = 1216
+      Height = 21
+      Top = 504
+      Width = 930
       Panels = <>
     end
   end
@@ -247,16 +244,16 @@ object FxmlView: TFxmlView
     Left = 0
     Height = 40
     Top = 0
-    Width = 1218
+    Width = 932
     Align = alTop
     ClientHeight = 40
-    ClientWidth = 1218
+    ClientWidth = 932
     TabOrder = 1
     object Label1: TLabel
       Left = 10
-      Height = 13
+      Height = 14
       Top = 10
-      Width = 25
+      Width = 27
       Caption = 'Tag :'
       Color = clBtnFace
       ParentColor = False
@@ -264,9 +261,9 @@ object FxmlView: TFxmlView
     end
     object Label3: TLabel
       Left = 286
-      Height = 13
+      Height = 14
       Top = 11
-      Width = 29
+      Width = 31
       Caption = 'Text :'
       Color = clBtnFace
       ParentColor = False
@@ -274,7 +271,7 @@ object FxmlView: TFxmlView
     end
     object edtTag: TEdit
       Left = 48
-      Height = 21
+      Height = 24
       Top = 8
       Width = 151
       OnChange = edtTagChange
@@ -293,7 +290,7 @@ object FxmlView: TFxmlView
     end
     object edtText: TEdit
       Left = 326
-      Height = 21
+      Height = 24
       Top = 8
       Width = 200
       OnChange = edtTextChange
@@ -311,7 +308,7 @@ object FxmlView: TFxmlView
       TabOrder = 3
     end
     object btnApply: TButton
-      Left = 1684
+      Left = 1398
       Height = 25
       Top = 6
       Width = 75
@@ -368,28 +365,13 @@ object FxmlView: TFxmlView
     DefaultFilter = 'SQL Files (*.sql)|*.sql'
     Enabled = False
     CommentAttri.Foreground = clGreen
-    CommentAttri.FrameEdges = sfeAround
     DataTypeAttri.Foreground = clLime
-    DataTypeAttri.FrameEdges = sfeAround
-    DefaultPackageAttri.FrameEdges = sfeAround
-    ExceptionAttri.FrameEdges = sfeAround
-    FunctionAttri.FrameEdges = sfeAround
     IdentifierAttri.Foreground = clMenuHighlight
-    IdentifierAttri.FrameEdges = sfeAround
     KeyAttri.Foreground = clMaroon
-    KeyAttri.FrameEdges = sfeAround
     NumberAttri.Foreground = clOlive
-    NumberAttri.FrameEdges = sfeAround
-    PLSQLAttri.FrameEdges = sfeAround
-    SpaceAttri.FrameEdges = sfeAround
-    SQLPlusAttri.FrameEdges = sfeAround
     StringAttri.Foreground = clNavy
-    StringAttri.FrameEdges = sfeAround
     SymbolAttri.Foreground = clRed
-    SymbolAttri.FrameEdges = sfeAround
     TableNameAttri.Foreground = clTeal
-    TableNameAttri.FrameEdges = sfeAround
-    VariableAttri.FrameEdges = sfeAround
     SQLDialect = sqlSybase
     left = 392
     top = 360

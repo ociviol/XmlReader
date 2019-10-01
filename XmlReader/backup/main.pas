@@ -11,7 +11,10 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  Windows, Messages, Menus, ExtCtrls, Grids, ufxmlviewer;
+{$ifdef MsWindows}
+  Windows, Messages,
+{$endif}
+  Menus, ExtCtrls, Grids, ufxmlviewer;
 
 type
 
@@ -169,7 +172,6 @@ begin
   finally
     Free;
   end;
-  Caption := S_CAPTION;
   SetAppCaption;
 end;
 

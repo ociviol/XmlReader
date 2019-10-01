@@ -66,3 +66,8 @@ __recovery/
 *.ppu
 *.obj
 XmlReader/out/*
+/precompiled binairies/Linux/link.res
+/XmlDoc/backup/*
+/XmlReader/XmlReaderLinux.res
+/precompiled binairies/Linux/XmlReaderLinux
+/precompiled binairies/Windows/XmlReaderLinux.ini
