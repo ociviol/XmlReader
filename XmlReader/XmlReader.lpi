@@ -24,7 +24,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="2"/>
-      <BuildNr Value="14"/>
+      <BuildNr Value="15"/>
       <StringTable CompanyName="Ollivier Civiol" FileDescription="Xml Editor" InternalName="XmlReader" LegalCopyright="Ollivier Civiol 2014-2019" LegalTrademarks="Ollivier Civiol" OriginalFilename="XmlReader.exe" ProductName="XmlReader"/>
     </VersionInfo>
     <BuildModes Count="3">
@@ -36,7 +36,7 @@
           <SearchPaths>
             <IncludeFiles Value="..\XmlDoc;$(ProjOutDir)"/>
             <OtherUnitFiles Value="..\XmlDoc;..\..\Utils"/>
-            <UnitOutputDirectory Value="out"/>
+            <UnitOutputDirectory Value=".\out"/>
           </SearchPaths>
           <Parsing>
             <SyntaxOptions>
