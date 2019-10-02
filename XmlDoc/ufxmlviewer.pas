@@ -61,6 +61,7 @@ type
     mnuCopyNode: TMenuItem;
     N2: TMenuItem;
     mnuPasteNode: TMenuItem;
+    procedure AttrGridEditingDone(Sender: TObject);
     procedure edtTagEnter(Sender: TObject);
     procedure edtTextEnter(Sender: TObject);
     procedure mnuCopyClick(Sender: TObject);
@@ -76,8 +77,6 @@ type
     procedure PopupMenu2Popup(Sender: TObject);
     procedure Wordwrap1Click(Sender: TObject);
     procedure mnuCopyNodePathClick(Sender: TObject);
-    //procedure AttrGridSetEditText(Sender: TObject; ACol, ARow: Integer;
-    //  const Value: string);
     procedure AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure MnuInsertClick(Sender: TObject);
@@ -93,8 +92,6 @@ type
     procedure TreeView1DragDrop(Sender, Source: TObject; X, Y: Integer);
     procedure mnuCopyNodeClick(Sender: TObject);
     procedure mnuPasteNodeClick(Sender: TObject);
-    procedure AttrGridSetEditText(Sender: TObject; ACol, ARow: Integer;
-      const Value: string);
   private
     { private declarations }
     FXmlDoc: TXMLDoc;
@@ -210,9 +207,21 @@ begin
 end;
 
 procedure TFxmlView.mnuAddAttributeClick(Sender: TObject);
+var
+  attr, val : string;
 begin
-  with AttrGrid do
-    RowCount := RowCount + 1;
+  if Assigned(TreeView1.Selected.Data) then
+  begin
+    attr := InputBox('New attribute name', 'Type in new attribute name', '');
+    if attr <> '' then
+      val := InputBox('New attribute value', 'Type in new attribute value', '');
+
+    if val <> '' then
+    begin
+      TXmlElement(TreeView1.Selected.Data).AddAttrib(attr + '=' + val);
+      AttrGrid.Init(TXmlElement(TreeView1.Selected.Data));
+    end;
+  end;
 end;
 
 procedure TFxmlView.mnuPasteNodeClick(Sender: TObject);
@@ -566,6 +575,18 @@ begin
   btnSearchTag.Default := True;
 end;
 
+procedure TFxmlView.AttrGridEditingDone(Sender: TObject);
+begin
+  if AttrGrid.Col > 0 then
+    with AttrGrid, Node do
+       if Cells[0, Row] <> '' then
+         if GetAttribute(Cells[0, Row]) <> Cells[1, Row] then
+         begin
+           SetAttribute(Cells[0, Row], Cells[1, Row]);
+           TreeView1.Selected.Text := MakeNodeText(TreeView1.Selected.Data);
+         end;
+end;
+
 procedure TFxmlView.AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;
   var CanSelect: Boolean);
 begin
@@ -576,19 +597,6 @@ begin
     if aRow >0 then
       CanSelect := (AttrGrid.Cells[0, aRow] <> '')
   end;
-end;
-
-procedure TFxmlView.AttrGridSetEditText(Sender: TObject; ACol, ARow: Integer;
-  const Value: string);
-begin
- if ACol > 0 then
-   with AttrGrid, Node do
-      if Cells[0, ARow] <> '' then
-        if GetAttribute(Cells[0, ARow]) <> Cells[1, ARow] then
-        begin
-          SetAttribute(Cells[0, ARow], Cells[1, ARow]);
-          TreeView1.Selected.Text := MakeNodeText(TreeView1.Selected.Data);
-        end;
 end;
 
 procedure TFxmlView.btnSearchMemoClick(Sender: TObject);

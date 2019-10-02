@@ -116,8 +116,8 @@ object FxmlView: TFxmlView
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
             TitleFont.Name = 'Tahoma'
+            OnEditingDone = AttrGridEditingDone
             OnSelectCell = AttrGridSelectCell
-            OnSetEditText = AttrGridSetEditText
             ColWidths = (
               120
               274
