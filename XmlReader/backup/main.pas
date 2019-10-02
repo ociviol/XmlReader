@@ -213,7 +213,8 @@ end;
 
 procedure TFXmlViewer.FormShow(Sender: TObject);
 begin
-  Application.QueueAsyncCall(@DoLoad, 0);
+  if ParamCount > 0 then
+    Application.QueueAsyncCall(@DoLoad, 0);
 end;
 
 function TFXmlViewer.AddNewXmlreader: TFxmlView;
@@ -231,8 +232,6 @@ begin
     name := 'fmXmlView' + inttostr(PageControl1.PageCount + 1);
     parent := TabSheet;
     Align := alClient;
-    // TreeView1.PopupMenu := PopupMenu1;
-    // SynMemo1.PopupMenu  := PopupMenu2;
   end;
   PageControl1.ActivePageIndex := PageControl1.PageCount - 1;
   SetFrameBounds(result);
@@ -254,7 +253,7 @@ begin
       Panel4.Height := ReadInteger('bounds', 'Panel4', 252);
       AttrGrid.ColWidths[0] := ReadInteger('bounds', 'Col1', 200);
       AttrGrid.ColWidths[1] := ReadInteger('bounds', 'Col2', 200);
-      //SynMemo1.WordWrap := ReadBool('ScriptMemo', 'Wordwrap', False);
+      SynMemo1.WordWrap := ReadBool('ScriptMemo', 'Wordwrap', False);
     end;
   finally
     Free;

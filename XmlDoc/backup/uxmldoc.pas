@@ -5,8 +5,7 @@ unit uxmldoc;
  ollivier@civiol.eu
  https://ollivierciviolsoftware.wordpress.com/
 }
-//{$MODE Delphi}
-{$mode objfpc}{$H+}
+{$MODE Delphi}
 
 
 //

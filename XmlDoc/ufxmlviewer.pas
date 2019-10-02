@@ -26,6 +26,7 @@ type
     edtText: TEdit;
     Label1: TLabel;
     Label3: TLabel;
+    Memo1: TMemo;
     mnuCopy: TMenuItem;
     Panel1: TPanel;
     Panel2: TPanel;
@@ -43,7 +44,6 @@ type
     Panel5: TPanel;
     edtSearchMemo: TEdit;
     btnSearchMemo: TButton;
-    SynMemo1: TSynMemo;
     SynSQLSyn1: TSynSQLSyn;
     PopupMenu2: TPopupMenu;
     mnuCopyMemo: TMenuItem;
@@ -64,6 +64,7 @@ type
     procedure AttrGridEditingDone(Sender: TObject);
     procedure edtTagEnter(Sender: TObject);
     procedure edtTextEnter(Sender: TObject);
+    procedure Memo1Change(Sender: TObject);
     procedure mnuCopyClick(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure edtTagChange(Sender: TObject);
@@ -171,13 +172,7 @@ end;
 
 procedure TFxmlView.mnuCopyMemoClick(Sender: TObject);
 begin
-  with SynMemo1 do
-  begin
-    if (SelStart <> SelEnd) then
-      Clipboard.AsText := Copy(Lines.Text, SelStart, SelEnd)
-    else
-      Clipboard.AsText := Lines.Text;
-  end;
+  Clipboard.AsText := Memo1.SelText;
 end;
 
 procedure TFxmlView.mnuCopyNodeClick(Sender: TObject);
@@ -283,7 +278,7 @@ end;
 
 procedure TFxmlView.PopupMenu2Popup(Sender: TObject);
 begin
-  mnuCopyMemo.Enabled := SynMemo1.Lines.Text <> '';
+  mnuCopyMemo.Enabled := Memo1.SelLength > 0;
   //Wordwrap1.Checked := SynMemo1.WordWrap;
 end;
 
@@ -298,11 +293,13 @@ var
   Ex: TXmlElement;
 begin
   Ex := TXmlElement(TreeView1.Selected.Data);
-  SynMemo1.Clear;
 
-  if Assigned(Ex) then
+  Memo1.Clear;
+  AttrGrid.ClearGrid;
+  Memo1.Enabled := Assigned(Ex);
+
+  if Assigned(Ex) and (TreeView1.Selected.Level > 0) then
   begin
-    SynMemo1.Enabled := Ex.Text <> '';
     edtSearchMemo.Enabled := Ex.Text <> '';
     btnSearchMemo.Enabled := Ex.Text <> '';
     AttrGrid.Enabled := Ex.TagName <> 'xml';
@@ -314,19 +311,10 @@ begin
       btnApply.Enabled := False;
 
       AttrGrid.Init(Ex);
-    end
-    else
-      AttrGrid.ClearGrid;
+    end;
     // text
     if Ex.Text <> '' then
-      SynMemo1.Lines.Text := Ex.Text
-    else
-      SynMemo1.Lines.Text := '';
-  end
-  else
-  begin
-    AttrGrid.ClearGrid;
-    SynMemo1.Lines.Text := '';
+      Memo1.Lines.Text := Ex.Text;
   end;
 end;
 
@@ -577,7 +565,7 @@ end;
 
 procedure TFxmlView.AttrGridEditingDone(Sender: TObject);
 begin
-  if AttrGrid.Col > 0 then
+  if (AttrGrid.Col > 0) and (AttrGrid.Row > 0) then
     with AttrGrid, Node do
        if Cells[0, Row] <> '' then
          if GetAttribute(Cells[0, Row]) <> Cells[1, Row] then
@@ -604,21 +592,21 @@ var
   s: String;
   i: Integer;
 begin
-  if SynMemo1.SelStart > 0 then
+  if Memo1.SelStart > 0 then
   begin
-    s := SynMemo1.Lines.Text;
-    s := Copy(s, SynMemo1.SelEnd + 1, length(s));
+    s := Memo1.Lines.Text;
+    s := Memo1.SelText;
     i := Pos(edtSearchMemo.Text, s);
     if i > 0 then
-      Inc(i, SynMemo1.SelEnd);
+      Inc(i, Memo1.SelStart + Memo1.SelLength);
   end
   else
-    i := Pos(edtSearchMemo.Text, SynMemo1.Lines.Text);
+    i := Pos(edtSearchMemo.Text, Memo1.Lines.Text);
 
   if i > 0 then
   begin
-    SynMemo1.SelStart := i - 1;
-    SynMemo1.SelEnd := (i - 1) + length(edtSearchMemo.Text);
+    Memo1.SelStart := i - 1;
+    Memo1.SelLength := length(edtSearchMemo.Text);
   end;
 end;
 
@@ -642,6 +630,22 @@ procedure TFxmlView.edtTextEnter(Sender: TObject);
 begin
   btnSearchTag.Default := False;
   btnSearchText.Default := True;
+end;
+
+procedure TFxmlView.Memo1Change(Sender: TObject);
+var
+  Ex: TXmlElement;
+begin
+  if Assigned(TreeView1.Selected) then
+  begin
+    Ex := TXmlElement(TreeView1.Selected.Data);
+    if ASsigned(Ex) then
+    begin
+      Ex.Text :=  Memo1.Text;
+      edtSearchMemo.Enabled := Ex.Text <> '';
+      btnSearchMemo.Enabled := Ex.Text <> '';
+    end;
+  end;
 end;
 
 end.

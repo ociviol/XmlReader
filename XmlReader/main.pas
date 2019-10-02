@@ -232,8 +232,6 @@ begin
     name := 'fmXmlView' + inttostr(PageControl1.PageCount + 1);
     parent := TabSheet;
     Align := alClient;
-    // TreeView1.PopupMenu := PopupMenu1;
-    // SynMemo1.PopupMenu  := PopupMenu2;
   end;
   PageControl1.ActivePageIndex := PageControl1.PageCount - 1;
   SetFrameBounds(result);
