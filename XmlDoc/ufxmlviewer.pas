@@ -30,6 +30,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    Panel6: TPanel;
     pnlAttrib: TPanel;
     PopupMenu1: TPopupMenu;
     TreeView1: TTreeView;
@@ -304,10 +305,19 @@ begin
       btnApply.Enabled := False;
 
       AttrGrid.Init(Ex);
-    end;
+    end
+    else
+      AttrGrid.ClearGrid;
     // text
     if Ex.Text <> '' then
-      SynMemo1.Lines.Text := Ex.Text;
+      SynMemo1.Lines.Text := Ex.Text
+    else
+      SynMemo1.Lines.Text := '';
+  end
+  else
+  begin
+    AttrGrid.ClearGrid;
+    SynMemo1.Lines.Text := '';
   end;
 end;
 
@@ -561,7 +571,11 @@ procedure TFxmlView.AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;
 begin
   CanSelect := Assigned(TreeView1.Selected);
   if CanSelect then
-    CanSelect := TreeView1.SelectedXML.TagName <> 'xml';
+  begin
+    CanSelect := (TreeView1.SelectedXML.TagName <> 'xml');
+    if aRow >0 then
+      CanSelect := (AttrGrid.Cells[0, aRow] <> '')
+  end;
 end;
 
 procedure TFxmlView.AttrGridSetEditText(Sender: TObject; ACol, ARow: Integer;

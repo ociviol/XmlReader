@@ -47,6 +47,7 @@ type
   protected
     procedure Resize; override;
   public
+    procedure ClearGrid;
     procedure Init(aNode : TXmlElement; OnProgress : TXMLProgress = nil);
     property Node : TXMLElement read FNode;
   end;
@@ -409,23 +410,25 @@ begin
   end; 
 end;
 
+procedure TStringGrid.ClearGrid;
+begin
+  FixedRows := 0;
+  RowCount := 0;
+  RowCount := 2;
+  ColCount := 2;
+  FixedCols := 1;
+  FixedRows := 1;
+  Cells[0, 0] := 'Attribute';
+  Cells[1, 0] := 'Value';
+end;
+
 procedure TStringGrid.Init(aNode : TXmlElement; OnProgress : TXMLProgress = nil);
 var
   i: Integer;
-
-  procedure ClearGrid;
-  begin
-    RowCount := 0;
-    FixedRows := 0;
-    RowCount := 1;
-    ColCount := 2;
-    FixedCols := 1;
-  end;
-
 begin
   FNode := aNode;
   ClearGrid;
-  RowCount := aNode.Attributes.Count;
+//  RowCount := aNode.Attributes.Count+1;
 
   if Assigned(aNode) then
   begin
@@ -437,11 +440,11 @@ begin
       with aNode do
         for i := 0 to NbAttributes - 1 do
         begin
-          Cells[0, i] := AttributeName[i];
+          Cells[0, i+1] := AttributeName[i];
           if Length(AttributeValue[i]) > 50 then
-            Cells[1, i] := ShortAttributeValue[i]
+            Cells[1, i+1] := ShortAttributeValue[i]
           else
-            Cells[1, i] := AttributeValue[i];
+            Cells[1, i+1] := AttributeValue[i];
 
         end;
     end;

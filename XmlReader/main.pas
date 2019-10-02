@@ -239,6 +239,7 @@ begin
   end;
   PageControl1.ActivePageIndex := PageControl1.PageCount - 1;
   SetFrameBounds(result);
+  result.AttrGrid.ClearGrid;
 end;
 
 procedure TFXmlViewer.SetFrameBounds(aFrame: TFxmlView);
@@ -249,20 +250,18 @@ begin
   s := copy(s, 1, Length(s) - 3) + 'ini';
 
   with TInifile.Create(s) do
-    try
-      with aFrame do
-      begin
-        PnlAttrib.Width := ReadInteger('bounds', 'PnlAttrib', 445);
-        Panel4.Height := ReadInteger('bounds', 'Panel4', 252);
-        AttrGrid.ColWidths[0] := ReadInteger('bounds', 'Col1', 200);
-        AttrGrid.ColWidths[1] := ReadInteger('bounds', 'Col2', 200);
-        AttrGrid.Cells[0, 0] := 'Attribute';
-        AttrGrid.Cells[1, 0] := 'Value';
-        //SynMemo1.WordWrap := ReadBool('ScriptMemo', 'Wordwrap', False);
-      end;
-    finally
-      Free;
+  try
+    with aFrame do
+    begin
+      PnlAttrib.Width := ReadInteger('bounds', 'PnlAttrib', 445);
+      Panel4.Height := ReadInteger('bounds', 'Panel4', 252);
+      AttrGrid.ColWidths[0] := ReadInteger('bounds', 'Col1', 200);
+      AttrGrid.ColWidths[1] := ReadInteger('bounds', 'Col2', 200);
+      //SynMemo1.WordWrap := ReadBool('ScriptMemo', 'Wordwrap', False);
     end;
+  finally
+    Free;
+  end;
 end;
 
 procedure TFXmlViewer.About1Click(Sender: TObject);
