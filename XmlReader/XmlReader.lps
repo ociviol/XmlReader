@@ -3,7 +3,7 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="11"/>
-    <BuildModes Active="Default"/>
+    <BuildModes Active="Debug"/>
     <Units Count="14">
       <Unit0>
         <Filename Value="XmlReader.lpr"/>
