@@ -7,6 +7,7 @@ unit uxmldoc;
 }
 {$MODE Delphi}
 
+
 //
 // XmlDoc : XMlDocument, Ollivier Civiol 2014
 //

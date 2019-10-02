@@ -5,7 +5,8 @@ unit main;
  ollivier@civiol.eu
  https://ollivierciviolsoftware.wordpress.com/
 }
-{$MODE Delphi}
+//{$MODE Delphi}
+{$mode objfpc}{$H+}
 
 interface
 
@@ -62,9 +63,8 @@ type
     FFilename: String;
     procedure LoadFile(filename: String);
     function GetActiveXmlView: TFxmlView;
-    // procedure Doload2(var Msg : TMessage); message WM_USER+1;
     //procedure ReceiveData_Handler(var msg: TWMCopyData); message WM_COPYDATA;
-    //procedure DoLoad(var msg: TMessage); message WM_USER + 2;
+    procedure DoLoad(data : int64);
     function AddNewXmlreader: TFxmlView;
     procedure SetFrameBounds(aFrame: TFxmlView);
     procedure SetAppCaption;
@@ -213,10 +213,7 @@ end;
 
 procedure TFXmlViewer.FormShow(Sender: TObject);
 begin
-{$ifdef MsWindows}
-  if ParamCount > 0 then
-    PostMessage(handle, WM_USER + 2, 0, 0);
-{$endif}
+  Application.QueueAsyncCall(@DoLoad, 0);
 end;
 
 function TFXmlViewer.AddNewXmlreader: TFxmlView;
@@ -239,7 +236,7 @@ begin
   end;
   PageControl1.ActivePageIndex := PageControl1.PageCount - 1;
   SetFrameBounds(result);
-  AttrGrid.ClearGrid;
+  result.AttrGrid.ClearGrid;
 end;
 
 procedure TFXmlViewer.SetFrameBounds(aFrame: TFxmlView);
@@ -274,12 +271,12 @@ procedure TFXmlViewer.Copytoclipboard1Click(Sender: TObject);
 begin
   Clipboard.AsText := ActiveXmlview.XmlDoc.AsString;
 end;
-{
-procedure TFXmlViewer.DoLoad(var msg: TMessage);
+
+procedure TFXmlViewer.DoLoad(data : int64);
 begin
   LoadFile(ParamStr(1));
 end;
-
+{
 procedure TFXmlViewer.ReceiveData_Handler(var msg: TWMCopyData);
 var
   s : string;

@@ -22,7 +22,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="2"/>
-      <BuildNr Value="8"/>
+      <BuildNr Value="10"/>
       <StringTable CompanyName="Ollivier Civiol" FileDescription="Xml Editor" InternalName="XmlReader" LegalCopyright="Ollivier Civiol 2014-2019" LegalTrademarks="Ollivier Civiol" OriginalFilename="XmlReader.exe" ProductName="XmlReader"/>
     </VersionInfo>
     <BuildModes Count="3">
