@@ -19,7 +19,6 @@
         <ComponentName Value="FXmlViewer"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="205"/>
         <CursorPos Y="216"/>
@@ -34,10 +33,14 @@
         <ComponentName Value="FxmlView"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="74"/>
-        <CursorPos X="56" Y="94"/>
+        <TopLine Value="201"/>
+        <CursorPos X="72" Y="221"/>
         <UsageCount Value="22"/>
+        <Bookmarks Count="1">
+          <Item0 X="20" Y="222" ID="1"/>
+        </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -46,17 +49,19 @@
         <Filename Value="..\XmlDoc\uxmldoc.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="1323"/>
-        <CursorPos X="7" Y="1344"/>
+        <TopLine Value="1083"/>
+        <CursorPos X="3" Y="1087"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
-        <TopLine Value="85"/>
-        <CursorPos X="9" Y="6"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="40"/>
+        <CursorPos X="17" Y="422"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit4>
       <Unit5>
@@ -98,9 +103,8 @@
         <TopLine Value="435"/>
         <CursorPos X="23" Y="454"/>
         <UsageCount Value="11"/>
-        <Bookmarks Count="2">
-          <Item0 X="37" Y="584" ID="1"/>
-          <Item1 X="10" Y="593" ID="2"/>
+        <Bookmarks Count="1">
+          <Item0 X="10" Y="593" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -120,78 +124,146 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit12>
     </Units>
-    <JumpHistory Count="17" HistoryIndex="16">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
-        <Caret Line="11" Column="18"/>
+        <Filename Value="main.pas"/>
+        <Caret Line="70" Column="15" TopLine="47"/>
       </Position1>
       <Position2>
-        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
-        <Caret Line="22" Column="22" TopLine="10"/>
+        <Filename Value="main.pas"/>
+        <Caret Line="177" Column="17" TopLine="149"/>
       </Position2>
       <Position3>
-        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
-        <Caret Line="154" Column="24" TopLine="126"/>
+        <Filename Value="main.pas"/>
+        <Caret Line="213" Column="14" TopLine="196"/>
       </Position3>
       <Position4>
-        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
-        <Caret Line="154" Column="22" TopLine="135"/>
+        <Filename Value="main.pas"/>
       </Position4>
       <Position5>
         <Filename Value="main.pas"/>
-        <Caret Line="70" Column="15" TopLine="47"/>
+        <Caret Line="13" Column="5"/>
       </Position5>
       <Position6>
         <Filename Value="main.pas"/>
-        <Caret Line="177" Column="17" TopLine="149"/>
+        <Caret Line="85" Column="43" TopLine="56"/>
       </Position6>
       <Position7>
         <Filename Value="main.pas"/>
-        <Caret Line="213" Column="14" TopLine="196"/>
+        <Caret Line="213" Column="70" TopLine="198"/>
       </Position7>
       <Position8>
         <Filename Value="main.pas"/>
+        <Caret Line="271" Column="66" TopLine="240"/>
       </Position8>
       <Position9>
         <Filename Value="main.pas"/>
-        <Caret Line="13" Column="5"/>
+        <Caret Line="15"/>
       </Position9>
       <Position10>
         <Filename Value="main.pas"/>
-        <Caret Line="85" Column="43" TopLine="56"/>
+        <Caret Line="98" TopLine="81"/>
       </Position10>
       <Position11>
         <Filename Value="main.pas"/>
-        <Caret Line="213" Column="70" TopLine="198"/>
+        <Caret Line="172" TopLine="156"/>
       </Position11>
       <Position12>
-        <Filename Value="main.pas"/>
-        <Caret Line="271" Column="66" TopLine="240"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="94" Column="56" TopLine="74"/>
       </Position12>
       <Position13>
         <Filename Value="main.pas"/>
-        <Caret Line="15"/>
+        <Caret Line="14" Column="22" TopLine="2"/>
       </Position13>
       <Position14>
-        <Filename Value="main.pas"/>
-        <Caret Line="98" TopLine="81"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="94" Column="56" TopLine="74"/>
       </Position14>
       <Position15>
-        <Filename Value="main.pas"/>
-        <Caret Line="172" TopLine="156"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="214" Column="56" TopLine="202"/>
       </Position15>
       <Position16>
         <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
-        <Caret Line="94" Column="56" TopLine="74"/>
+        <Caret Line="15" Column="56"/>
       </Position16>
       <Position17>
-        <Filename Value="main.pas"/>
-        <Caret Line="14" Column="22" TopLine="2"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="584" Column="2" TopLine="581"/>
       </Position17>
+      <Position18>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="220" Column="35" TopLine="212"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="599" TopLine="589"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="602" TopLine="579"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="80" TopLine="52"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="578" Column="15" TopLine="561"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="80" Column="32" TopLine="79"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="218" Column="18" TopLine="208"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="218" Column="18" TopLine="190"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="301" Column="46" TopLine="289"/>
+      </Position28>
+      <Position29>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="220" Column="49" TopLine="201"/>
+      </Position29>
+      <Position30>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="93" Column="15" TopLine="78"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes Count="0" ActiveMode="default"/>
     </RunParams>
   </ProjectSession>
+  <Debugging>
+    <BreakPoints Count="2">
+      <Item1>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Line Value="580"/>
+      </Item1>
+      <Item2>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Line Value="581"/>
+      </Item2>
+    </BreakPoints>
+  </Debugging>
 </CONFIG>

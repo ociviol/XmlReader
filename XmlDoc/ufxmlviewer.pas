@@ -26,10 +26,12 @@ type
     edtText: TEdit;
     Label1: TLabel;
     Label3: TLabel;
+    Memo1: TMemo;
     mnuCopy: TMenuItem;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    Panel6: TPanel;
     pnlAttrib: TPanel;
     PopupMenu1: TPopupMenu;
     TreeView1: TTreeView;
@@ -42,7 +44,6 @@ type
     Panel5: TPanel;
     edtSearchMemo: TEdit;
     btnSearchMemo: TButton;
-    SynMemo1: TSynMemo;
     SynSQLSyn1: TSynSQLSyn;
     PopupMenu2: TPopupMenu;
     mnuCopyMemo: TMenuItem;
@@ -60,8 +61,10 @@ type
     mnuCopyNode: TMenuItem;
     N2: TMenuItem;
     mnuPasteNode: TMenuItem;
+    procedure AttrGridEditingDone(Sender: TObject);
     procedure edtTagEnter(Sender: TObject);
     procedure edtTextEnter(Sender: TObject);
+    procedure Memo1Change(Sender: TObject);
     procedure mnuCopyClick(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure edtTagChange(Sender: TObject);
@@ -75,8 +78,6 @@ type
     procedure PopupMenu2Popup(Sender: TObject);
     procedure Wordwrap1Click(Sender: TObject);
     procedure mnuCopyNodePathClick(Sender: TObject);
-    //procedure AttrGridSetEditText(Sender: TObject; ACol, ARow: Integer;
-    //  const Value: string);
     procedure AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure MnuInsertClick(Sender: TObject);
@@ -92,8 +93,6 @@ type
     procedure TreeView1DragDrop(Sender, Source: TObject; X, Y: Integer);
     procedure mnuCopyNodeClick(Sender: TObject);
     procedure mnuPasteNodeClick(Sender: TObject);
-    procedure AttrGridSetEditText(Sender: TObject; ACol, ARow: Integer;
-      const Value: string);
   private
     { private declarations }
     FXmlDoc: TXMLDoc;
@@ -173,13 +172,7 @@ end;
 
 procedure TFxmlView.mnuCopyMemoClick(Sender: TObject);
 begin
-  with SynMemo1 do
-  begin
-    if (SelStart <> SelEnd) then
-      Clipboard.AsText := Copy(Lines.Text, SelStart, SelEnd)
-    else
-      Clipboard.AsText := Lines.Text;
-  end;
+  Clipboard.AsText := Memo1.SelText;
 end;
 
 procedure TFxmlView.mnuCopyNodeClick(Sender: TObject);
@@ -209,9 +202,21 @@ begin
 end;
 
 procedure TFxmlView.mnuAddAttributeClick(Sender: TObject);
+var
+  attr, val : string;
 begin
-  with AttrGrid do
-    RowCount := RowCount + 1;
+  if Assigned(TreeView1.Selected.Data) then
+  begin
+    attr := InputBox('New attribute name', 'Type in new attribute name', '');
+    if attr <> '' then
+      val := InputBox('New attribute value', 'Type in new attribute value', '');
+
+    if val <> '' then
+    begin
+      TXmlElement(TreeView1.Selected.Data).AddAttrib(attr + '=' + val);
+      AttrGrid.Init(TXmlElement(TreeView1.Selected.Data));
+    end;
+  end;
 end;
 
 procedure TFxmlView.mnuPasteNodeClick(Sender: TObject);
@@ -273,7 +278,7 @@ end;
 
 procedure TFxmlView.PopupMenu2Popup(Sender: TObject);
 begin
-  mnuCopyMemo.Enabled := SynMemo1.Lines.Text <> '';
+  mnuCopyMemo.Enabled := Memo1.SelLength > 0;
   //Wordwrap1.Checked := SynMemo1.WordWrap;
 end;
 
@@ -288,11 +293,13 @@ var
   Ex: TXmlElement;
 begin
   Ex := TXmlElement(TreeView1.Selected.Data);
-  SynMemo1.Clear;
 
-  if Assigned(Ex) then
+  Memo1.Clear;
+  AttrGrid.ClearGrid;
+  Memo1.Enabled := Assigned(Ex);
+
+  if Assigned(Ex) and (TreeView1.Selected.Level > 0) then
   begin
-    SynMemo1.Enabled := Ex.Text <> '';
     edtSearchMemo.Enabled := Ex.Text <> '';
     btnSearchMemo.Enabled := Ex.Text <> '';
     AttrGrid.Enabled := Ex.TagName <> 'xml';
@@ -307,7 +314,7 @@ begin
     end;
     // text
     if Ex.Text <> '' then
-      SynMemo1.Lines.Text := Ex.Text;
+      Memo1.Lines.Text := Ex.Text;
   end;
 end;
 
@@ -556,25 +563,28 @@ begin
   btnSearchTag.Default := True;
 end;
 
+procedure TFxmlView.AttrGridEditingDone(Sender: TObject);
+begin
+  if (AttrGrid.Col > 0) and (AttrGrid.Row > 0) then
+    with AttrGrid, Node do
+       if Cells[0, Row] <> '' then
+         if GetAttribute(Cells[0, Row]) <> Cells[1, Row] then
+         begin
+           SetAttribute(Cells[0, Row], Cells[1, Row]);
+           TreeView1.Selected.Text := MakeNodeText(TreeView1.Selected.Data);
+         end;
+end;
+
 procedure TFxmlView.AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;
   var CanSelect: Boolean);
 begin
   CanSelect := Assigned(TreeView1.Selected);
   if CanSelect then
-    CanSelect := TreeView1.SelectedXML.TagName <> 'xml';
-end;
-
-procedure TFxmlView.AttrGridSetEditText(Sender: TObject; ACol, ARow: Integer;
-  const Value: string);
-begin
- if ACol > 0 then
-   with AttrGrid, Node do
-      if Cells[0, ARow] <> '' then
-        if GetAttribute(Cells[0, ARow]) <> Cells[1, ARow] then
-        begin
-          SetAttribute(Cells[0, ARow], Cells[1, ARow]);
-          TreeView1.Selected.Text := MakeNodeText(TreeView1.Selected.Data);
-        end;
+  begin
+    CanSelect := (TreeView1.SelectedXML.TagName <> 'xml');
+    if aRow >0 then
+      CanSelect := (AttrGrid.Cells[0, aRow] <> '')
+  end;
 end;
 
 procedure TFxmlView.btnSearchMemoClick(Sender: TObject);
@@ -582,21 +592,21 @@ var
   s: String;
   i: Integer;
 begin
-  if SynMemo1.SelStart > 0 then
+  if Memo1.SelStart > 0 then
   begin
-    s := SynMemo1.Lines.Text;
-    s := Copy(s, SynMemo1.SelEnd + 1, length(s));
+    s := Memo1.Lines.Text;
+    s := Memo1.SelText;
     i := Pos(edtSearchMemo.Text, s);
     if i > 0 then
-      Inc(i, SynMemo1.SelEnd);
+      Inc(i, Memo1.SelStart + Memo1.SelLength);
   end
   else
-    i := Pos(edtSearchMemo.Text, SynMemo1.Lines.Text);
+    i := Pos(edtSearchMemo.Text, Memo1.Lines.Text);
 
   if i > 0 then
   begin
-    SynMemo1.SelStart := i - 1;
-    SynMemo1.SelEnd := (i - 1) + length(edtSearchMemo.Text);
+    Memo1.SelStart := i - 1;
+    Memo1.SelLength := length(edtSearchMemo.Text);
   end;
 end;
 
@@ -620,6 +630,22 @@ procedure TFxmlView.edtTextEnter(Sender: TObject);
 begin
   btnSearchTag.Default := False;
   btnSearchText.Default := True;
+end;
+
+procedure TFxmlView.Memo1Change(Sender: TObject);
+var
+  Ex: TXmlElement;
+begin
+  if Assigned(TreeView1.Selected) then
+  begin
+    Ex := TXmlElement(TreeView1.Selected.Data);
+    if ASsigned(Ex) then
+    begin
+      Ex.Text :=  Memo1.Text;
+      edtSearchMemo.Enabled := Ex.Text <> '';
+      btnSearchMemo.Enabled := Ex.Text <> '';
+    end;
+  end;
 end;
 
 end.

@@ -12,8 +12,10 @@
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
       <Title Value="XmlReader"/>
+      <Scaled Value="True"/>
       <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
+      <Icon Value="0"/>
     </General>
     <i18n>
       <EnableI18N LFM="False"/>
@@ -22,7 +24,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="2"/>
-      <BuildNr Value="4"/>
+      <BuildNr Value="15"/>
       <StringTable CompanyName="Ollivier Civiol" FileDescription="Xml Editor" InternalName="XmlReader" LegalCopyright="Ollivier Civiol 2014-2019" LegalTrademarks="Ollivier Civiol" OriginalFilename="XmlReader.exe" ProductName="XmlReader"/>
     </VersionInfo>
     <BuildModes Count="3">
@@ -31,9 +33,6 @@
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
-          <Target>
-            <Filename Value="..\precompiled binairies\Windows\XmlReader.exe"/>
-          </Target>
           <SearchPaths>
             <IncludeFiles Value="..\XmlDoc;$(ProjOutDir)"/>
             <OtherUnitFiles Value="..\XmlDoc;..\..\Utils"/>
@@ -81,13 +80,10 @@
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
-          <Target>
-            <Filename Value="..\precompiled binairies\Windows\XmlReader.exe"/>
-          </Target>
           <SearchPaths>
             <IncludeFiles Value="..\XmlDoc;$(ProjOutDir)"/>
             <OtherUnitFiles Value="..\XmlDoc;..\..\Utils"/>
-            <UnitOutputDirectory Value=".\out"/>
+            <UnitOutputDirectory Value="out"/>
           </SearchPaths>
           <Parsing>
             <SyntaxOptions>
@@ -164,13 +160,10 @@
   <CompilerOptions>
     <Version Value="11"/>
     <PathDelim Value="\"/>
-    <Target>
-      <Filename Value="..\precompiled binairies\Windows\XmlReader.exe"/>
-    </Target>
     <SearchPaths>
       <IncludeFiles Value="..\XmlDoc;$(ProjOutDir)"/>
       <OtherUnitFiles Value="..\XmlDoc;..\..\Utils"/>
-      <UnitOutputDirectory Value=".\out"/>
+      <UnitOutputDirectory Value="out"/>
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>

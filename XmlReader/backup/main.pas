@@ -5,7 +5,8 @@ unit main;
  ollivier@civiol.eu
  https://ollivierciviolsoftware.wordpress.com/
 }
-{$MODE Delphi}
+//{$MODE Delphi}
+{$mode objfpc}{$H+}
 
 interface
 
@@ -62,9 +63,8 @@ type
     FFilename: String;
     procedure LoadFile(filename: String);
     function GetActiveXmlView: TFxmlView;
-    // procedure Doload2(var Msg : TMessage); message WM_USER+1;
     //procedure ReceiveData_Handler(var msg: TWMCopyData); message WM_COPYDATA;
-    //procedure DoLoad(var msg: TMessage); message WM_USER + 2;
+    procedure DoLoad(data : int64);
     function AddNewXmlreader: TFxmlView;
     procedure SetFrameBounds(aFrame: TFxmlView);
     procedure SetAppCaption;
@@ -214,7 +214,7 @@ end;
 procedure TFXmlViewer.FormShow(Sender: TObject);
 begin
   if ParamCount > 0 then
-    PostMessage(handle, WM_USER + 2, 0, 0);
+    Application.QueueAsyncCall(@DoLoad, 0);
 end;
 
 function TFXmlViewer.AddNewXmlreader: TFxmlView;
@@ -232,11 +232,10 @@ begin
     name := 'fmXmlView' + inttostr(PageControl1.PageCount + 1);
     parent := TabSheet;
     Align := alClient;
-    // TreeView1.PopupMenu := PopupMenu1;
-    // SynMemo1.PopupMenu  := PopupMenu2;
   end;
   PageControl1.ActivePageIndex := PageControl1.PageCount - 1;
   SetFrameBounds(result);
+  result.AttrGrid.ClearGrid;
 end;
 
 procedure TFXmlViewer.SetFrameBounds(aFrame: TFxmlView);
@@ -247,20 +246,18 @@ begin
   s := copy(s, 1, Length(s) - 3) + 'ini';
 
   with TInifile.Create(s) do
-    try
-      with aFrame do
-      begin
-        PnlAttrib.Width := ReadInteger('bounds', 'PnlAttrib', 445);
-        Panel4.Height := ReadInteger('bounds', 'Panel4', 252);
-        AttrGrid.ColWidths[0] := ReadInteger('bounds', 'Col1', 200);
-        AttrGrid.ColWidths[1] := ReadInteger('bounds', 'Col2', 200);
-        AttrGrid.Cells[0, 0] := 'Attribute';
-        AttrGrid.Cells[1, 0] := 'Value';
-        //SynMemo1.WordWrap := ReadBool('ScriptMemo', 'Wordwrap', False);
-      end;
-    finally
-      Free;
+  try
+    with aFrame do
+    begin
+      PnlAttrib.Width := ReadInteger('bounds', 'PnlAttrib', 445);
+      Panel4.Height := ReadInteger('bounds', 'Panel4', 252);
+      AttrGrid.ColWidths[0] := ReadInteger('bounds', 'Col1', 200);
+      AttrGrid.ColWidths[1] := ReadInteger('bounds', 'Col2', 200);
+      SynMemo1.WordWrap := ReadBool('ScriptMemo', 'Wordwrap', False);
     end;
+  finally
+    Free;
+  end;
 end;
 
 procedure TFXmlViewer.About1Click(Sender: TObject);
@@ -273,12 +270,12 @@ procedure TFXmlViewer.Copytoclipboard1Click(Sender: TObject);
 begin
   Clipboard.AsText := ActiveXmlview.XmlDoc.AsString;
 end;
-{
-procedure TFXmlViewer.DoLoad(var msg: TMessage);
+
+procedure TFXmlViewer.DoLoad(data : int64);
 begin
   LoadFile(ParamStr(1));
 end;
-
+{
 procedure TFXmlViewer.ReceiveData_Handler(var msg: TWMCopyData);
 var
   s : string;

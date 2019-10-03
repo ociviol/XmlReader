@@ -7,6 +7,7 @@ unit uxmldoc;
 }
 {$MODE Delphi}
 
+
 //
 // XmlDoc : XMlDocument, Ollivier Civiol 2014
 //
@@ -1337,7 +1338,11 @@ end;
 function TXMLDoc.GetReader:TXMLReader;
 begin
   result := TXMLReader.Create;
-  result.ReaderSettings.ErrorHandling := ehRaise;
+  with result.ReaderSettings do
+  begin
+    ErrorHandling := ehRaise;
+    StrictXML := False;
+  end;
 end;
 
 function TXMLDoc.GetWriter:TXMLWriter;

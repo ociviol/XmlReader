@@ -7,6 +7,7 @@ unit uxmldoc;
 }
 {$MODE Delphi}
 
+
 //
 // XmlDoc : XMlDocument, Ollivier Civiol 2014
 //
@@ -978,7 +979,8 @@ end;
 function  TXMLElement.GetLevel:Integer;
 begin
   result := 0;
-  if assigned(self.parent) then result := parent.level + 1;
+  if assigned(self) and Assigned(Self.parent) then
+    result := parent.level + 1;
 end;
 
 function TXMLElement.GetText:String;
