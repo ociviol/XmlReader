@@ -336,8 +336,8 @@ begin
       // add node
       t := Items.AddChildObject(ANode, s, Elements[i]);
       // add text if any
-      if Elements[i].Text <> '' then
-        Items.AddChildObject(t, Elements[i].Text, Elements[i]);
+      //if Elements[i].Text <> '' then
+      //  Items.AddChildObject(t, Elements[i].Text, Elements[i]);
       // if childnodes then add them
       if Elements[i].NbElements > 0 then
         AddTreeNodes(Elements[i], t);

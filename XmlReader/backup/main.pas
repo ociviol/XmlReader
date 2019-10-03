@@ -156,8 +156,11 @@ var
   s: string;
 begin
   s := Application.Exename;
+{$ifdef MsWindows}
   s := copy(s, 1, Length(s) - 3) + 'ini';
-
+{$else}
+  s := s + '.ini';
+{$endif}
   with TInifile.Create(s) do
   try
     if ReadBool('bounds', 'Maxed', False) then
@@ -253,7 +256,7 @@ begin
       Panel4.Height := ReadInteger('bounds', 'Panel4', 252);
       AttrGrid.ColWidths[0] := ReadInteger('bounds', 'Col1', 200);
       AttrGrid.ColWidths[1] := ReadInteger('bounds', 'Col2', 200);
-      SynMemo1.WordWrap := ReadBool('ScriptMemo', 'Wordwrap', False);
+      //SynMemo1.WordWrap := ReadBool('ScriptMemo', 'Wordwrap', False);
     end;
   finally
     Free;

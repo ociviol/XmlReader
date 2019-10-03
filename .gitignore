@@ -74,3 +74,5 @@ XmlReader/out/*
 precompiled binairies/OsX/XmlReaderOsX.app/Contents/MacOS/XmlReaderini
 precompiled binairies/OsX/XmlReaderOsX.app/Contents/MacOS/XmlReaderOsX
 XmlReader/*.exe
+/precompiled binairies/Linux/XmlReader
+/precompiled binairies/Linux/XmlReader.ini

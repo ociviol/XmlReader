@@ -11,7 +11,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, ExtCtrls, StdCtrls, ComCtrls,
-  Grids, Menus, uxmldoc, Clipbrd, SynEditHighlighter,
+  Grids, Menus, uxmldoc, Clipbrd, SynEditHighlighter, Graphics,
   SynHighlighterSQL, SynEdit, SynMemo, Dialogs, uXMLHelpers;
 
 type
@@ -76,6 +76,8 @@ type
     procedure edtSearchMemoEnter(Sender: TObject);
     procedure mnuCopyMemoClick(Sender: TObject);
     procedure PopupMenu2Popup(Sender: TObject);
+    procedure TreeView1CustomDrawItem(Sender: TCustomTreeView; Node: TTreeNode;
+      State: TCustomDrawState; var DefaultDraw: Boolean);
     procedure Wordwrap1Click(Sender: TObject);
     procedure mnuCopyNodePathClick(Sender: TObject);
     procedure AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;
@@ -280,6 +282,16 @@ procedure TFxmlView.PopupMenu2Popup(Sender: TObject);
 begin
   mnuCopyMemo.Enabled := Memo1.SelLength > 0;
   //Wordwrap1.Checked := SynMemo1.WordWrap;
+end;
+
+procedure TFxmlView.TreeView1CustomDrawItem(Sender: TCustomTreeView;
+  Node: TTreeNode; State: TCustomDrawState; var DefaultDraw: Boolean);
+begin
+  with Sender.Canvas do
+  if TXmlElement(Node.Data).Text.Length > 0 then
+    Font.Style := [fsBold]
+  else
+    Font.Style := [];
 end;
 
 procedure TFxmlView.PopupMenu3Popup(Sender: TObject);
