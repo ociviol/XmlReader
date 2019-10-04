@@ -4,12 +4,12 @@
     <PathDelim Value="\"/>
     <Version Value="12"/>
     <BuildModes Active="Release"/>
-    <Units Count="13">
+    <Units Count="14">
       <Unit0>
         <Filename Value="XmlReaderOsX.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="3" Y="18"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit0>
@@ -19,11 +19,10 @@
         <ComponentName Value="FXmlViewer"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="205"/>
         <CursorPos Y="216"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -34,10 +33,10 @@
         <ComponentName Value="FxmlView"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="74"/>
         <CursorPos X="56" Y="94"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -48,7 +47,7 @@
         <EditorIndex Value="1"/>
         <TopLine Value="1323"/>
         <CursorPos X="7" Y="1344"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
@@ -97,7 +96,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="435"/>
         <CursorPos X="23" Y="454"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="12"/>
         <Bookmarks Count="2">
           <Item0 X="37" Y="584" ID="1"/>
           <Item1 X="10" Y="593" ID="2"/>
@@ -119,8 +118,18 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit12>
+      <Unit13>
+        <Filename Value="..\XmlDoc\OWideSupp.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="767"/>
+        <CursorPos X="20" Y="781"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit13>
     </Units>
-    <JumpHistory Count="17" HistoryIndex="16">
+    <JumpHistory Count="18" HistoryIndex="17">
       <Position1>
         <Filename Value="..\XmlDoc\uxmldoc.pas"/>
         <Caret Line="11" Column="18"/>
@@ -188,6 +197,10 @@
         <Filename Value="main.pas"/>
         <Caret Line="14" Column="22" TopLine="2"/>
       </Position17>
+      <Position18>
+        <Filename Value="main.pas"/>
+        <Caret Line="216" TopLine="205"/>
+      </Position18>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
