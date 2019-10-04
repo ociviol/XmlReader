@@ -11,8 +11,8 @@ object FxmlView: TFxmlView
   ParentFont = False
   TabOrder = 0
   TabStop = True
-  DesignLeft = 370
-  DesignTop = 216
+  DesignLeft = 279
+  DesignTop = 252
   object Panel2: TPanel
     Left = 0
     Height = 526
@@ -271,41 +271,33 @@ object FxmlView: TFxmlView
     top = 320
     object mnuCopy: TMenuItem
       Caption = 'Copy XML (text)'
-      OnClick = mnuCopyClick
     end
     object mnuCopyNodePath: TMenuItem
       Caption = 'Copy Node Path (text)'
-      OnClick = mnuCopyNodePathClick
     end
     object N2: TMenuItem
       Caption = '-'
     end
     object mnuCopyNode: TMenuItem
       Caption = 'Copy Node (non text)'
-      OnClick = mnuCopyNodeClick
     end
     object mnuPasteNode: TMenuItem
       Caption = 'Paste node (non text)'
-      OnClick = mnuPasteNodeClick
     end
     object N1: TMenuItem
       Caption = '-'
     end
     object MnuInsert: TMenuItem
       Caption = 'Insert Node'
-      OnClick = MnuInsertClick
     end
     object mnuDeleteNode: TMenuItem
       Caption = 'Delete Node'
-      OnClick = mnuDeleteNodeClick
     end
     object mnuDuplicateNode: TMenuItem
       Caption = 'Duplicate node'
-      OnClick = mnuDuplicateNodeClick
     end
     object mnuRenameNode: TMenuItem
       Caption = 'Rename Node'
-      OnClick = mnuRenameNodeClick
     end
     object N3: TMenuItem
       Caption = '-'
@@ -376,6 +368,38 @@ object FxmlView: TFxmlView
     object ActionMoveDown: TAction
       Caption = 'Move Node Down'
       OnExecute = ActionMoveDownExecute
+    end
+    object ActionCopyXmlAsText: TAction
+      Caption = 'Copy Xml (Text)'
+      OnExecute = ActionCopyXmlAsTextExecute
+    end
+    object ActionCopyNodePathAsText: TAction
+      Caption = 'Copy Node Path (text)'
+      OnExecute = ActionCopyNodePathAsTextExecute
+    end
+    object ActionCopyNode: TAction
+      Caption = 'Copy Node (non text)'
+      OnExecute = ActionCopyNodeExecute
+    end
+    object ActionPasteNode: TAction
+      Caption = 'Paste Node (non text)'
+      OnExecute = ActionPasteNodeExecute
+    end
+    object ActionInsertNode: TAction
+      Caption = 'Insert Node'
+      OnExecute = ActionInsertNodeExecute
+    end
+    object ActionDeleteNode: TAction
+      Caption = 'Delete Node'
+      OnExecute = ActionDeleteNodeExecute
+    end
+    object ActionDuplicateNode: TAction
+      Caption = 'Duplicate Node'
+      OnExecute = ActionDuplicateNodeExecute
+    end
+    object ActionRenameNode: TAction
+      Caption = 'Rename Node'
+      OnExecute = ActionRenameNodeExecute
     end
   end
 end

@@ -13,7 +13,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls,
 {$ifdef MsWindows}
-  Windows, Messages,
+  Messages,
 {$endif}
   Menus, ExtCtrls, Grids, ufxmlviewer;
 
@@ -183,8 +183,11 @@ var
   s: string;
 begin
   s := Application.Exename;
+{$ifdef MsWindows}
   s := copy(s, 1, Length(s) - 3) + 'ini';
-
+{$else}
+  s := s + '.ini';
+{$endif}
   with TInifile.Create(s) do
     try
       if WindowState = wsMaximized then

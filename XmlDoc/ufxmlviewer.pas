@@ -12,13 +12,21 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, ExtCtrls, StdCtrls, ComCtrls,
   Grids, Menus, uxmldoc, Clipbrd, SynEditHighlighter, Graphics,
-  SynHighlighterSQL, SynEdit, SynMemo, Dialogs, ActnList, uXMLHelpers;
+  SynHighlighterSQL, SynEdit, Dialogs, ActnList, uXMLHelpers;
 
 type
 
   { TFxmlView }
 
   TFxmlView = class(TFrame)
+    ActionRenameNode: TAction;
+    ActionDuplicateNode: TAction;
+    ActionDeleteNode: TAction;
+    ActionInsertNode: TAction;
+    ActionPasteNode: TAction;
+    ActionCopyNode: TAction;
+    ActionCopyNodePathAsText: TAction;
+    ActionCopyXmlAsText: TAction;
     ActionMoveDown: TAction;
     ActionMoveUp: TAction;
     ActionList1: TActionList;
@@ -67,13 +75,20 @@ type
     mnuCopyNode: TMenuItem;
     N2: TMenuItem;
     mnuPasteNode: TMenuItem;
+    procedure ActionCopyNodeExecute(Sender: TObject);
+    procedure ActionCopyNodePathAsTextExecute(Sender: TObject);
+    procedure ActionCopyXmlAsTextExecute(Sender: TObject);
+    procedure ActionDeleteNodeExecute(Sender: TObject);
+    procedure ActionDuplicateNodeExecute(Sender: TObject);
+    procedure ActionInsertNodeExecute(Sender: TObject);
     procedure ActionMoveDownExecute(Sender: TObject);
     procedure ActionMoveUpExecute(Sender: TObject);
+    procedure ActionPasteNodeExecute(Sender: TObject);
+    procedure ActionRenameNodeExecute(Sender: TObject);
     procedure AttrGridEditingDone(Sender: TObject);
     procedure edtTagEnter(Sender: TObject);
     procedure edtTextEnter(Sender: TObject);
     procedure Memo1Change(Sender: TObject);
-    procedure mnuCopyClick(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure edtTagChange(Sender: TObject);
     procedure btnSearchTagClick(Sender: TObject);
@@ -87,22 +102,15 @@ type
     procedure TreeView1CustomDrawItem(Sender: TCustomTreeView; Node: TTreeNode;
       State: TCustomDrawState; var DefaultDraw: Boolean);
     procedure Wordwrap1Click(Sender: TObject);
-    procedure mnuCopyNodePathClick(Sender: TObject);
     procedure AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
-    procedure MnuInsertClick(Sender: TObject);
-    procedure mnuDeleteNodeClick(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
     procedure mnuAddAttributeClick(Sender: TObject);
     procedure mnuRemoveAttributeClick(Sender: TObject);
     procedure PopupMenu3Popup(Sender: TObject);
-    procedure mnuDuplicateNodeClick(Sender: TObject);
-    procedure mnuRenameNodeClick(Sender: TObject);
     procedure TreeView1DragOver(Sender, Source: TObject; X, Y: Integer;
       State: TDragState; var Accept: Boolean);
     procedure TreeView1DragDrop(Sender, Source: TObject; X, Y: Integer);
-    procedure mnuCopyNodeClick(Sender: TObject);
-    procedure mnuPasteNodeClick(Sender: TObject);
   private
     { private declarations }
     FXmlDoc: TXMLDoc;
@@ -162,16 +170,31 @@ begin
   ActionMoveUp.Enabled:=(Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data)) and
                         (TXMLElement(TreeView1.Selected.Data).Index > 0);
 
-  mnuDeleteNode.Enabled := Assigned(TreeView1.Selected);
-  mnuDuplicateNode.Enabled := Assigned(TreeView1.Selected);
-  mnuCopyNode.Enabled := Assigned(TreeView1.Selected);
-  mnuPasteNode.Enabled := pos('XMLNODE:', Clipboard.AsText)>0;
+  ActionRenameNode.Enabled := Assigned(TreeView1.Selected);
+  ActionDuplicateNode.Enabled := Assigned(TreeView1.Selected);
+  ActionDeleteNode.Enabled := Assigned(TreeView1.Selected);
+  ActionInsertNode.Enabled := Assigned(TreeView1.Selected);
+  ActionPasteNode.Enabled := pos('XMLNODE:', Clipboard.AsText)>0;
+  ActionCopyNode.Enabled := Assigned(TreeView1.Selected);
+  ActionCopyNodePathAsText.Enabled := Assigned(TreeView1.Selected);
+  ActionCopyXmlAsText.Enabled := Assigned(TreeView1.Selected);
+
+  //mnuDeleteNode.Enabled := Assigned(TreeView1.Selected);
+  //mnuDuplicateNode.Enabled := Assigned(TreeView1.Selected);
+  //mnuCopyNode.Enabled := Assigned(TreeView1.Selected);
+  //mnuPasteNode.Enabled := pos('XMLNODE:', Clipboard.AsText)>0;
 
   if Assigned(TreeView1.Selected) then
   begin
-    mnuDuplicateNode.Enabled := TreeView1.Selected.Level > 0;
-    mnuCopyNode.Enabled :=  TreeView1.Selected.Level > 0;
-    mnuDeleteNode.Enabled := TreeView1.Selected.Level > 0;
+    //mnuDuplicateNode.Enabled := TreeView1.Selected.Level > 0;
+    ActionDuplicateNode.Enabled := TreeView1.Selected.Level > 0;
+    //mnuCopyNode.Enabled :=  TreeView1.Selected.Level > 0;
+    ActionCopyNode.Enabled := TreeView1.Selected.Level > 0;
+    //mnuDeleteNode.Enabled := TreeView1.Selected.Level > 0;
+    ActionDeleteNode.Enabled := TreeView1.Selected.Level > 0;
+    ActionRenameNode.Enabled := TreeView1.Selected.Level > 0;
+    ActionCopyNodePathAsText.Enabled := TreeView1.Selected.Level > 0;
+    ActionCopyXmlAsText.Enabled := TreeView1.Selected.Level > 0;
   end;
 end;
 
@@ -206,18 +229,6 @@ begin
   Clipboard.AsText := Memo1.SelText;
 end;
 
-procedure TFxmlView.mnuCopyNodeClick(Sender: TObject);
-begin
-  Clipboard.AsText := 'XMLNODE:'+inttostr(Integer(TreeView1.Selected.Data));
-end;
-
-procedure TFxmlView.mnuCopyNodePathClick(Sender: TObject);
-begin
-  with TreeView1 do
-    if Assigned(Selected) then
-      Clipboard.AsText := TXmlElement(Selected.Data).Path;
-end;
-
 procedure TFxmlView.LoadFromFile(filename: String);
 begin
   Screen.Cursor := CrHourglass;
@@ -250,46 +261,8 @@ begin
   end;
 end;
 
-procedure TFxmlView.mnuPasteNodeClick(Sender: TObject);
-var
-  s : String;
-  aNode : TXmlElement;
-  Node : TTreeNode;
-begin
-  screen.Cursor := crHourglass;
-  try
-    s := ClipBoard.AsText;
-    s := copy(s ,9, length(s));
-    aNode := TXMLElement(StrToInt(s));
-    aNode := TXMLElement(Treeview1.Selected.Data).InsertNode(aNode);
-    Node := TreeView1.Items.AddChildObject(Treeview1.Selected, aNode.TagName, aNode);
-    TreeView1.AddTreeNodes(aNode, Node);
-  finally
-    screen.Cursor := crDefault;
-  end;
-end;
-
 procedure TFxmlView.mnuRemoveAttributeClick(Sender: TObject);
 begin;
-end;
-
-procedure TFxmlView.mnuRenameNodeClick(Sender: TObject);
-var
-  aElem: TXmlElement;
-  s: string;
-begin
-  aElem := TXmlElement(TreeView1.Selected.Data);
-  s := InputBox('Rename node', 'Type a new name for the node', aElem.TagName);
-  if s <> aElem.TagName then
-  begin
-    aElem.TagName := s;
-    TreeView1.Selected.Text := MakeNodeText(aElem);
-  end;
-end;
-
-procedure TFxmlView.mnuCopyClick(Sender: TObject);
-begin
-  Clipboard.AsText := FXmlDoc.AsString;
 end;
 
 procedure TFxmlView.PopupMenu1Popup(Sender: TObject);
@@ -323,30 +296,34 @@ procedure TFxmlView.TreeView1Change(Sender: TObject; Node: TTreeNode);
 var
   Ex: TXmlElement;
 begin
-  Ex := TXmlElement(TreeView1.Selected.Data);
-
-  Memo1.Clear;
-  AttrGrid.ClearGrid;
-  Memo1.Enabled := Assigned(Ex);
-
-  if TreeView1.Selected.Level > 1 then
-    if Assigned(Ex) and (TreeView1.Selected.Level > 0) then
+  if Assigned(TreeView1.Selected) then
+    if Assigned(TreeView1.Selected.Data) then
     begin
-      edtSearchMemo.Enabled := Ex.Text <> '';
-      btnSearchMemo.Enabled := Ex.Text <> '';
-      AttrGrid.Enabled := Ex.TagName <> 'xml';
-      // attribs
-      if Ex.NbAttributes > 0 then
-      begin
-        pnlAttrib.Visible := True;
-        btnApply.Visible := True;
-        btnApply.Enabled := False;
+      Ex := TXmlElement(TreeView1.Selected.Data);
 
-        AttrGrid.Init(Ex);
-      end;
-      // text
-      if Ex.Text <> '' then
-        Memo1.Lines.Text := Ex.Text;
+      Memo1.Clear;
+      AttrGrid.ClearGrid;
+      Memo1.Enabled := Assigned(Ex);
+
+      if TreeView1.Selected.Level > 1 then
+        if Assigned(Ex) and (TreeView1.Selected.Level > 0) then
+        begin
+          edtSearchMemo.Enabled := Ex.Text <> '';
+          btnSearchMemo.Enabled := Ex.Text <> '';
+          AttrGrid.Enabled := Ex.TagName <> 'xml';
+          // attribs
+          if Ex.NbAttributes > 0 then
+          begin
+            pnlAttrib.Visible := True;
+            btnApply.Visible := True;
+            btnApply.Enabled := False;
+
+            AttrGrid.Init(Ex);
+          end;
+          // text
+          if Ex.Text <> '' then
+            Memo1.Lines.Text := Ex.Text;
+        end;
     end;
 end;
 
@@ -439,73 +416,6 @@ begin
   theattribs := aElement.Attribs;
   if theattribs <> '' then
     result := result + ' (' + theattribs + ')';
-end;
-
-procedure TFxmlView.mnuDeleteNodeClick(Sender: TObject);
-var
-  aElement: TXmlElement;
-begin
-  aElement := TXmlElement(TreeView1.Selected.Data);
-  if Assigned(aElement) then
-  begin
-    TreeView1.Items.BeginUpdate;
-    try
-      aElement.Parent.DeleteChildNode(aElement);
-      TreeView1.Items.Delete(TreeView1.Selected);
-    finally
-      TreeView1.Items.EndUpdate;
-    end;
-  end;
-end;
-
-procedure TFxmlView.mnuDuplicateNodeClick(Sender: TObject);
-var
-  aElement, aNewElem: TXmlElement;
-  ANode: TTreeNode;
-begin
-  aElement := TXmlElement(TreeView1.Selected.Data);
-  if Assigned(aElement) then
-  begin
-    TreeView1.Items.BeginUpdate;
-    try
-      aNewElem := aElement.Parent.AddChildNode(aElement.TagName);
-      aNewElem.Assign(aElement);
-      ANode := TreeView1.Items.AddChildObject(TreeView1.Selected.Parent,
-        aNewElem.TagName, aNewElem);
-      TreeView1.AddTreeNodes(aNewElem, ANode);
-      ANode.Expand(False);
-      ANode.Text := MakeNodeText(aNewElem);
-    finally
-      TreeView1.Items.EndUpdate;
-    end;
-  end;
-end;
-
-procedure TFxmlView.MnuInsertClick(Sender: TObject);
-var
-  aElement: TXmlElement;
-  ANode: TTreeNode;
-begin
-  if Assigned(TreeView1.Selected) then
-  begin
-    aElement := TXmlElement(TreeView1.Selected.Data);
-    with aElement, TreeView1 do
-    begin
-      aElement := aElement.AddChildNode('New');
-      ANode := Items.AddChildObject(Selected, 'New', aElement);
-      Selected.Expand(True);
-      Selected := ANode;
-    end;
-  end
-  else
-  begin
-    aElement := XmlDoc.DocumentElement;
-    if not Assigned(aElement) then
-      XmlDoc.CreateNewDocumentElement('Document');
-
-    // TreeView1.Items.AddChildObject(nil, 'Document', aElement).Expand(True);
-    FillTreeView;
-  end;
 end;
 
 procedure TFxmlView.FillTreeView;
@@ -630,6 +540,39 @@ begin
   FillTreeView;
 end;
 
+procedure TFxmlView.ActionPasteNodeExecute(Sender: TObject);
+var
+  s : String;
+  aNode : TXmlElement;
+  Node : TTreeNode;
+begin
+  screen.Cursor := crHourglass;
+  try
+    s := ClipBoard.AsText;
+    s := copy(s ,9, length(s));
+    aNode := TXMLElement(StrToInt(s));
+    aNode := TXMLElement(Treeview1.Selected.Data).InsertNode(aNode);
+    Node := TreeView1.Items.AddChildObject(Treeview1.Selected, aNode.TagName, aNode);
+    TreeView1.AddTreeNodes(aNode, Node);
+  finally
+    screen.Cursor := crDefault;
+  end;
+end;
+
+procedure TFxmlView.ActionRenameNodeExecute(Sender: TObject);
+var
+  aElem: TXmlElement;
+  s: string;
+begin
+  aElem := TXmlElement(TreeView1.Selected.Data);
+  s := InputBox('Rename node', 'Type a new name for the node', aElem.TagName);
+  if s <> aElem.TagName then
+  begin
+    aElem.TagName := s;
+    TreeView1.Selected.Text := MakeNodeText(aElem);
+  end;
+end;
+
 procedure TFxmlView.ActionMoveDownExecute(Sender: TObject);
 var
   Node, Dad : TXMLElement;
@@ -651,6 +594,90 @@ begin
       Dad.SwapElements(p, p+1);
   end;
   FillTreeView;
+end;
+
+procedure TFxmlView.ActionCopyXmlAsTextExecute(Sender: TObject);
+begin
+  Clipboard.AsText := FXmlDoc.AsString;
+end;
+
+procedure TFxmlView.ActionDeleteNodeExecute(Sender: TObject);
+var
+  aElement: TXmlElement;
+begin
+  aElement := TXmlElement(TreeView1.Selected.Data);
+  if Assigned(aElement) then
+  begin
+    TreeView1.Items.BeginUpdate;
+    try
+      aElement.Parent.DeleteChildNode(aElement);
+      TreeView1.Items.Delete(TreeView1.Selected);
+    finally
+      TreeView1.Items.EndUpdate;
+    end;
+  end;
+end;
+
+procedure TFxmlView.ActionDuplicateNodeExecute(Sender: TObject);
+var
+  aElement, aNewElem: TXmlElement;
+  ANode: TTreeNode;
+begin
+  aElement := TXmlElement(TreeView1.Selected.Data);
+  if Assigned(aElement) then
+  begin
+    TreeView1.Items.BeginUpdate;
+    try
+      aNewElem := aElement.Parent.AddChildNode(aElement.TagName);
+      aNewElem.Assign(aElement);
+      ANode := TreeView1.Items.AddChildObject(TreeView1.Selected.Parent,
+        aNewElem.TagName, aNewElem);
+      TreeView1.AddTreeNodes(aNewElem, ANode);
+      ANode.Expand(False);
+      ANode.Text := MakeNodeText(aNewElem);
+    finally
+      TreeView1.Items.EndUpdate;
+    end;
+  end;
+end;
+
+procedure TFxmlView.ActionInsertNodeExecute(Sender: TObject);
+var
+  aElement: TXmlElement;
+  ANode: TTreeNode;
+begin
+  if Assigned(TreeView1.Selected) then
+  begin
+    aElement := TXmlElement(TreeView1.Selected.Data);
+    with aElement, TreeView1 do
+    begin
+      aElement := aElement.AddChildNode('New');
+      ANode := Items.AddChildObject(Selected, 'New', aElement);
+      Selected.Expand(True);
+      Selected := ANode;
+    end;
+  end
+  else
+  begin
+    aElement := XmlDoc.DocumentElement;
+    if not Assigned(aElement) then
+      XmlDoc.CreateNewDocumentElement('Document');
+
+    // TreeView1.Items.AddChildObject(nil, 'Document', aElement).Expand(True);
+    FillTreeView;
+  end;
+end;
+
+procedure TFxmlView.ActionCopyNodePathAsTextExecute(Sender: TObject);
+begin
+  with TreeView1 do
+    if Assigned(Selected) then
+      Clipboard.AsText := TXmlElement(Selected.Data).Path;
+end;
+
+procedure TFxmlView.ActionCopyNodeExecute(Sender: TObject);
+begin
+  Clipboard.AsText := 'XMLNODE:'+inttostr(Integer(TreeView1.Selected.Data));
 end;
 
 procedure TFxmlView.AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;

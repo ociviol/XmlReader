@@ -12,9 +12,6 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls,
-{$ifdef MsWindows}
-  Windows, Messages,
-{$endif}
   Menus, ExtCtrls, Grids, ufxmlviewer;
 
 type
