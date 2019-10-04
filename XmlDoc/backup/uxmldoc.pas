@@ -27,6 +27,8 @@ const
 type
   TXMLDoc = Class;
 
+  { TXMLElement }
+
   TXMLElement = Class(TObject)
   private
     FElements : TList;
@@ -37,6 +39,7 @@ type
     FOwner : TXMLDoc;
     FParent : TXMLElement;
     FTokenType: TXMLReaderTokenType;
+    function GetIndex(Elem : TXmlElement): Integer;
     procedure SetTagName(aName : String);
   protected
     function GetElement(index : integer):TXMLElement; overload;
@@ -88,6 +91,7 @@ type
     procedure RemoveChild(aNode : TXMLElement);
     function  SelectSingleNode(aNodeName : String):TXMLElement;
     function  SelectNodes(aName : String) : TList;
+    procedure SwapElements(aFirst, aSecond : Integer);
     // CP added functions
     function  GetAttributeName(index : integer):string; inline;
     procedure AddAttrib(attr : String); inline;
@@ -121,6 +125,7 @@ type
     property NbElements : integer read GetNbElements;
     property NbAttributes : integer read GetNbAttributes;
     property Elements[index : integer] : TXMLElement read GetElement;
+    property Index[Elem : TXmlElement]: Integer read GetIndex;
     // tweek to offer MSXML compatibility
     //property ChildNodes : TList read GetElements;
     property Attribs : String read GetAttribs;
@@ -421,6 +426,16 @@ begin
         Add(FElements[i]);
 end;
 
+procedure TXMLElement.SwapElements(aFirst, aSecond: Integer);
+var
+  Node : TObject;
+begin
+  Node := FElements[aFirst];
+  FElements[aFirst] := FElements[aSecond];
+  FElements[aSecond] := Node;
+  Owner.SetModified(Self);
+end;
+
 function TXMLElement.GetAttribute(AName: string): variant;
 var
   s : String;
@@ -684,7 +699,7 @@ begin
   end;
 end;
 
-procedure TXMLElement.SetAttribute(AName: string; AValue: variant);
+procedure TXMLElement.SetAttribute(AName: string; AValue: Variant);
 var
   s : string;
 begin
@@ -715,7 +730,8 @@ begin
   AddChildNode(aNodeName).Text := aValue;
 end;
 
-function TXMLElement.NodeByAttributeValue(aNodeName, aAttributeName, aValue: string):TXMLElement;
+function TXMLElement.NodeByAttributeValue(ANodeName, AAttributeName,
+  AValue: string): TXMLElement;
 var
   i,j : integer;
 begin
@@ -901,6 +917,20 @@ begin
   end;
 end;
 
+function TXMLElement.GetIndex(Elem : TXmlElement): Integer;
+var
+  i : integer;
+begin
+  result := -1;
+  if Assigned(Elem.Parent) then
+    for i:=0 to Elem.Parent.NbElements-1 do
+      if Elem.Parent.Elements[i] = Elem then
+      begin
+        result := i;
+        break;
+      end;
+end;
+
 function TXMLElement.GetElement(index : integer):TXMLElement;
 begin
   result := TXMLElement(FElements[index]);
@@ -979,7 +1009,8 @@ end;
 function  TXMLElement.GetLevel:Integer;
 begin
   result := 0;
-  if assigned(self.parent) then result := parent.level + 1;
+  if assigned(self) and Assigned(Self.parent) then
+    result := parent.level + 1;
 end;
 
 function TXMLElement.GetText:String;

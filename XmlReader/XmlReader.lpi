@@ -36,7 +36,7 @@
           <SearchPaths>
             <IncludeFiles Value="..\XmlDoc;$(ProjOutDir)"/>
             <OtherUnitFiles Value="..\XmlDoc;..\..\Utils"/>
-            <UnitOutputDirectory Value=".\out"/>
+            <UnitOutputDirectory Value="out"/>
           </SearchPaths>
           <Parsing>
             <SyntaxOptions>

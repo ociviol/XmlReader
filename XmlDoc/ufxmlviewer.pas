@@ -12,13 +12,16 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, ExtCtrls, StdCtrls, ComCtrls,
   Grids, Menus, uxmldoc, Clipbrd, SynEditHighlighter, Graphics,
-  SynHighlighterSQL, SynEdit, SynMemo, Dialogs, uXMLHelpers;
+  SynHighlighterSQL, SynEdit, SynMemo, Dialogs, ActnList, uXMLHelpers;
 
 type
 
   { TFxmlView }
 
   TFxmlView = class(TFrame)
+    ActionMoveDown: TAction;
+    ActionMoveUp: TAction;
+    ActionList1: TActionList;
     btnApply: TButton;
     btnSearchTag: TButton;
     btnSearchText: TButton;
@@ -27,6 +30,9 @@ type
     Label1: TLabel;
     Label3: TLabel;
     Memo1: TMemo;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    N3: TMenuItem;
     mnuCopy: TMenuItem;
     Panel1: TPanel;
     Panel2: TPanel;
@@ -61,6 +67,8 @@ type
     mnuCopyNode: TMenuItem;
     N2: TMenuItem;
     mnuPasteNode: TMenuItem;
+    procedure ActionMoveDownExecute(Sender: TObject);
+    procedure ActionMoveUpExecute(Sender: TObject);
     procedure AttrGridEditingDone(Sender: TObject);
     procedure edtTagEnter(Sender: TObject);
     procedure edtTextEnter(Sender: TObject);
@@ -105,6 +113,7 @@ type
       : TTreeNode;
     function MakeNodeText(aElement: TXmlElement): String;
     function GetModified:Boolean;
+    procedure EnabledActions;
   public
     { public declarations }
     constructor Create(aOwner: TComponent); override;
@@ -144,6 +153,26 @@ end;
 function TFxmlView.GetModified:Boolean;
 begin
   Result := FXmlDoc.Modified;
+end;
+
+procedure TFxmlView.EnabledActions;
+begin
+  ActionMoveDown.Enabled:= (Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data)) and
+      (TXMLElement(TreeView1.Selected.Data).Index < TXMLElement(TreeView1.Selected.Data).Parent.NbElements-1);
+  ActionMoveUp.Enabled:=(Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data)) and
+                        (TXMLElement(TreeView1.Selected.Data).Index > 0);
+
+  mnuDeleteNode.Enabled := Assigned(TreeView1.Selected);
+  mnuDuplicateNode.Enabled := Assigned(TreeView1.Selected);
+  mnuCopyNode.Enabled := Assigned(TreeView1.Selected);
+  mnuPasteNode.Enabled := pos('XMLNODE:', Clipboard.AsText)>0;
+
+  if Assigned(TreeView1.Selected) then
+  begin
+    mnuDuplicateNode.Enabled := TreeView1.Selected.Level > 0;
+    mnuCopyNode.Enabled :=  TreeView1.Selected.Level > 0;
+    mnuDeleteNode.Enabled := TreeView1.Selected.Level > 0;
+  end;
 end;
 
 procedure TFxmlView.LoadFromText(aText: WideString);
@@ -265,17 +294,7 @@ end;
 
 procedure TFxmlView.PopupMenu1Popup(Sender: TObject);
 begin
-  mnuDeleteNode.Enabled := Assigned(TreeView1.Selected);
-  mnuDuplicateNode.Enabled := Assigned(TreeView1.Selected);
-  mnuCopyNode.Enabled := Assigned(TreeView1.Selected);
-  mnuPasteNode.Enabled := pos('XMLNODE:', Clipboard.AsText)>0;
-
-  if Assigned(TreeView1.Selected) then
-  begin
-    mnuDuplicateNode.Enabled := TreeView1.Selected.Level > 0;
-    mnuCopyNode.Enabled :=  TreeView1.Selected.Level > 0;
-    mnuDeleteNode.Enabled := TreeView1.Selected.Level > 0;
-  end;
+  EnabledActions;
 end;
 
 procedure TFxmlView.PopupMenu2Popup(Sender: TObject);
@@ -310,24 +329,25 @@ begin
   AttrGrid.ClearGrid;
   Memo1.Enabled := Assigned(Ex);
 
-  if Assigned(Ex) and (TreeView1.Selected.Level > 0) then
-  begin
-    edtSearchMemo.Enabled := Ex.Text <> '';
-    btnSearchMemo.Enabled := Ex.Text <> '';
-    AttrGrid.Enabled := Ex.TagName <> 'xml';
-    // attribs
-    if Ex.NbAttributes > 0 then
+  if TreeView1.Selected.Level > 1 then
+    if Assigned(Ex) and (TreeView1.Selected.Level > 0) then
     begin
-      pnlAttrib.Visible := True;
-      btnApply.Visible := True;
-      btnApply.Enabled := False;
+      edtSearchMemo.Enabled := Ex.Text <> '';
+      btnSearchMemo.Enabled := Ex.Text <> '';
+      AttrGrid.Enabled := Ex.TagName <> 'xml';
+      // attribs
+      if Ex.NbAttributes > 0 then
+      begin
+        pnlAttrib.Visible := True;
+        btnApply.Visible := True;
+        btnApply.Enabled := False;
 
-      AttrGrid.Init(Ex);
+        AttrGrid.Init(Ex);
+      end;
+      // text
+      if Ex.Text <> '' then
+        Memo1.Lines.Text := Ex.Text;
     end;
-    // text
-    if Ex.Text <> '' then
-      Memo1.Lines.Text := Ex.Text;
-  end;
 end;
 
 procedure TFxmlView.TreeView1DragDrop(Sender, Source: TObject; X, Y: Integer);
@@ -585,6 +605,52 @@ begin
            SetAttribute(Cells[0, Row], Cells[1, Row]);
            TreeView1.Selected.Text := MakeNodeText(TreeView1.Selected.Data);
          end;
+end;
+
+procedure TFxmlView.ActionMoveUpExecute(Sender: TObject);
+var
+  Node, Dad : TXMLElement;
+  i, p : integer;
+begin
+  if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
+  begin
+    Node := TXMLElement(TreeView1.Selected.Data);
+    Dad := Node.Parent;
+    p := -1;
+    for i:=0 to Dad.NbElements-1 do
+      if Dad.Elements[i] = Node then
+      begin
+        p := i;
+        break;
+      end;
+    // found ?
+    if p > 0 then
+      Dad.SwapElements(p, p-1);
+  end;
+  FillTreeView;
+end;
+
+procedure TFxmlView.ActionMoveDownExecute(Sender: TObject);
+var
+  Node, Dad : TXMLElement;
+  i, p : integer;
+begin
+  if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
+  begin
+    Node := TXMLElement(TreeView1.Selected.Data);
+    Dad := Node.Parent;
+    p := -1;
+    for i:=0 to Dad.NbElements-1 do
+      if Dad.Elements[i] = Node then
+      begin
+        p := i;
+        break;
+      end;
+    // found ?
+    if (p >= 0) and (p < Dad.NbElements-1) then
+      Dad.SwapElements(p, p+1);
+  end;
+  FillTreeView;
 end;
 
 procedure TFxmlView.AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;

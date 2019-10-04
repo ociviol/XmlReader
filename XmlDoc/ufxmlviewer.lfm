@@ -33,16 +33,16 @@ object FxmlView: TFxmlView
     end
     object Panel3: TPanel
       Left = 1
-      Height = 499
+      Height = 497
       Top = 5
       Width = 930
       Align = alClient
-      ClientHeight = 499
+      ClientHeight = 497
       ClientWidth = 930
       TabOrder = 0
       object Splitter1: TSplitter
         Left = 479
-        Height = 497
+        Height = 495
         Top = 1
         Width = 5
         Align = alRight
@@ -50,7 +50,7 @@ object FxmlView: TFxmlView
       end
       object TreeView1: TTreeView
         Left = 1
-        Height = 497
+        Height = 495
         Top = 1
         Width = 478
         Align = alClient
@@ -66,19 +66,18 @@ object FxmlView: TFxmlView
         ReadOnly = True
         TabOrder = 0
         OnChange = TreeView1Change
-        OnCustomDrawItem = TreeView1CustomDrawItem
         OnDragDrop = TreeView1DragDrop
         OnDragOver = TreeView1DragOver
         Options = [tvoAutoItemHeight, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
       end
       object pnlAttrib: TPanel
         Left = 484
-        Height = 497
+        Height = 495
         Top = 1
         Width = 445
         Align = alRight
         BevelOuter = bvLowered
-        ClientHeight = 497
+        ClientHeight = 495
         ClientWidth = 445
         TabOrder = 1
         object Splitter2: TSplitter
@@ -169,7 +168,7 @@ object FxmlView: TFxmlView
         end
         object Memo1: TMemo
           Left = 1
-          Height = 204
+          Height = 202
           Top = 292
           Width = 443
           Align = alClient
@@ -182,8 +181,8 @@ object FxmlView: TFxmlView
     end
     object StatusBar1: TStatusBar
       Left = 1
-      Height = 21
-      Top = 504
+      Height = 23
+      Top = 502
       Width = 930
       Panels = <>
     end
@@ -199,9 +198,9 @@ object FxmlView: TFxmlView
     TabOrder = 1
     object Label1: TLabel
       Left = 10
-      Height = 14
+      Height = 13
       Top = 10
-      Width = 27
+      Width = 25
       Caption = 'Tag :'
       Color = clBtnFace
       ParentColor = False
@@ -209,9 +208,9 @@ object FxmlView: TFxmlView
     end
     object Label3: TLabel
       Left = 286
-      Height = 14
+      Height = 13
       Top = 11
-      Width = 31
+      Width = 29
       Caption = 'Text :'
       Color = clBtnFace
       ParentColor = False
@@ -219,7 +218,7 @@ object FxmlView: TFxmlView
     end
     object edtTag: TEdit
       Left = 48
-      Height = 24
+      Height = 21
       Top = 8
       Width = 151
       OnChange = edtTagChange
@@ -238,7 +237,7 @@ object FxmlView: TFxmlView
     end
     object edtText: TEdit
       Left = 326
-      Height = 24
+      Height = 21
       Top = 8
       Width = 200
       OnChange = edtTextChange
@@ -308,6 +307,15 @@ object FxmlView: TFxmlView
       Caption = 'Rename Node'
       OnClick = mnuRenameNodeClick
     end
+    object N3: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem1: TMenuItem
+      Action = ActionMoveUp
+    end
+    object MenuItem2: TMenuItem
+      Action = ActionMoveDown
+    end
   end
   object SynSQLSyn1: TSynSQLSyn
     DefaultFilter = 'SQL Files (*.sql)|*.sql'
@@ -356,6 +364,18 @@ object FxmlView: TFxmlView
     object mnuRemoveAttribute: TMenuItem
       Caption = 'Remove attribute'
       OnClick = mnuRemoveAttributeClick
+    end
+  end
+  object ActionList1: TActionList
+    left = 139
+    top = 143
+    object ActionMoveUp: TAction
+      Caption = 'Move Node Up'
+      OnExecute = ActionMoveUpExecute
+    end
+    object ActionMoveDown: TAction
+      Caption = 'Move Node Down'
+      OnExecute = ActionMoveDownExecute
     end
   end
 end
