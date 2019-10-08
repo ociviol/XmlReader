@@ -77,6 +77,7 @@ type
     mnuCopyNode: TMenuItem;
     N2: TMenuItem;
     mnuPasteNode: TMenuItem;
+    procedure ActionAddAttribExecute(Sender: TObject);
     procedure ActionCopyNodeExecute(Sender: TObject);
     procedure ActionCopyNodePathAsTextExecute(Sender: TObject);
     procedure ActionCopyXmlAsTextExecute(Sender: TObject);
