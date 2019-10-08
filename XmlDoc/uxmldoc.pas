@@ -1021,7 +1021,11 @@ end;
 procedure TXMLElement.SetText(aText : String);
 begin
   DoBeforeNodeChange;
-  FText := aText;
+  if FText <> aText then
+  begin
+    FText := aText;
+    Owner.SetModified(Self);
+  end;
   DoAfterNodeChange;
 end;
 

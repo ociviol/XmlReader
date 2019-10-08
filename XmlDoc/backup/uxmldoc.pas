@@ -39,7 +39,7 @@ type
     FOwner : TXMLDoc;
     FParent : TXMLElement;
     FTokenType: TXMLReaderTokenType;
-    function GetIndex(Elem : TXmlElement): Integer;
+    function GetIndex: Integer;
     procedure SetTagName(aName : String);
   protected
     function GetElement(index : integer):TXMLElement; overload;
@@ -125,7 +125,7 @@ type
     property NbElements : integer read GetNbElements;
     property NbAttributes : integer read GetNbAttributes;
     property Elements[index : integer] : TXMLElement read GetElement;
-    property Index[Elem : TXmlElement]: Integer read GetIndex;
+    property Index:Integer read GetIndex;
     // tweek to offer MSXML compatibility
     //property ChildNodes : TList read GetElements;
     property Attribs : String read GetAttribs;
@@ -917,14 +917,14 @@ begin
   end;
 end;
 
-function TXMLElement.GetIndex(Elem : TXmlElement): Integer;
+function TXMLElement.GetIndex: Integer;
 var
   i : integer;
 begin
   result := -1;
-  if Assigned(Elem.Parent) then
-    for i:=0 to Elem.Parent.NbElements-1 do
-      if Elem.Parent.Elements[i] = Elem then
+  if Assigned(Parent) then
+    for i:=0 to Parent.NbElements-1 do
+      if Parent.Elements[i] = Self then
       begin
         result := i;
         break;

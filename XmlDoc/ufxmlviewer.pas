@@ -213,15 +213,30 @@ begin
 end;
 
 procedure TFxmlView.Save;
+  procedure SaveWithBackup;
+  var
+    s : string;
+  begin
+    s := XmlDoc.filename;
+    repeat
+      s := s + '.bak';
+    until not FileExists(s);
+    RenameFile(XmlDoc.filename, s);
+    XmlDoc.SaveToFile(XmlDoc.filename);
+  end;
+
 begin
-  if not FileExists(XmlDoc.filename) { *Converted from FileExists* } then
+  if not FileExists(XmlDoc.filename) then
   begin
     with SaveDialog1 do
       if Execute then
         XmlDoc.SaveToFile(Files[0]);
   end
   else
-    XmlDoc.SaveToFile(XmlDoc.filename);
+    if True {Config.Backup to be implemented} then
+      SaveWithBackup
+    else
+      XmlDoc.SaveToFile(XmlDoc.filename);
 end;
 
 procedure TFxmlView.mnuCopyMemoClick(Sender: TObject);
