@@ -64,6 +64,7 @@ object FXmlViewer: TFXmlViewer
     end
     object Edit1: TMenuItem
       Caption = '&Edit'
+      OnClick = Edit1Click
       object Loadfromclipboard1: TMenuItem
         Caption = 'Load XML from clipboard'
         ShortCut = 16470

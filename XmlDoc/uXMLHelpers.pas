@@ -462,7 +462,7 @@ begin
         for i := 0 to NbAttributes - 1 do
         begin
           Cells[0, i+1] := AttributeName[i];
-          if Length(AttributeValue[i]) > 50 then
+          if Length(AttributeValue[i]) > 255 then
             Cells[1, i+1] := ShortAttributeValue[i]
           else
             Cells[1, i+1] := AttributeValue[i];
