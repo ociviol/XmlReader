@@ -310,6 +310,7 @@ end;
 procedure TFxmlView.TreeView1Change(Sender: TObject; Node: TTreeNode);
 var
   Ex: TXmlElement;
+  OldEvent : TNotifyEvent;
 begin
   if Assigned(TreeView1.Selected) then
     if Assigned(TreeView1.Selected.Data) then
@@ -337,7 +338,14 @@ begin
           end;
           // text
           if Ex.Text <> '' then
-            Memo1.Lines.Text := Ex.Text;
+          begin
+            Memo1.OnChange:=nil;
+            try
+               Memo1.Lines.Text := Ex.Text;
+            finally
+              Memo1.OnChange := Memo1Change;
+            end;
+          end;
         end;
     end;
 end;
