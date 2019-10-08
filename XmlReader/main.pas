@@ -39,6 +39,7 @@ type
     mnuTabs1: TMenuItem;
     N2: TMenuItem;
     Save1: TMenuItem;
+    procedure Edit1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
@@ -175,6 +176,11 @@ begin
   SetAppCaption;
 end;
 
+procedure TFXmlViewer.Edit1Click(Sender: TObject);
+begin
+  Copytoclipboard1.Enabled := Assigned(ActiveXmlview.XmlDoc.DocumentElement);
+end;
+
 procedure TFXmlViewer.FormDestroy(Sender: TObject);
 var
   s: string;
@@ -271,7 +277,8 @@ end;
 
 procedure TFXmlViewer.Copytoclipboard1Click(Sender: TObject);
 begin
-  Clipboard.AsText := ActiveXmlview.XmlDoc.AsString;
+  if Assigned(ActiveXmlview.XmlDoc.DocumentElement) then
+    Clipboard.AsText := ActiveXmlview.XmlDoc.AsString;
 end;
 
 procedure TFXmlViewer.DoLoad(data : int64);

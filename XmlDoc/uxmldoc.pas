@@ -901,6 +901,7 @@ begin
     end;
 
   until not Reader.ReadNextToken(Token);
+
 end;
 
 procedure TXMLElement.AddText(txt : String);
@@ -1021,7 +1022,11 @@ end;
 procedure TXMLElement.SetText(aText : String);
 begin
   DoBeforeNodeChange;
-  FText := aText;
+  if FText <> aText then
+  begin
+    FText := aText;
+    Owner.SetModified(Self);
+  end;
   DoAfterNodeChange;
 end;
 
@@ -1372,7 +1377,7 @@ begin
   with result.ReaderSettings do
   begin
     ErrorHandling := ehRaise;
-    StrictXML := False;
+    StrictXML := True;
   end;
 end;
 

@@ -19,6 +19,8 @@ type
   { TFxmlView }
 
   TFxmlView = class(TFrame)
+    ActionDelAttrib: TAction;
+    ActionAddAttrib: TAction;
     ActionRenameNode: TAction;
     ActionDuplicateNode: TAction;
     ActionDeleteNode: TAction;
@@ -75,6 +77,7 @@ type
     mnuCopyNode: TMenuItem;
     N2: TMenuItem;
     mnuPasteNode: TMenuItem;
+    procedure ActionAddAttribExecute(Sender: TObject);
     procedure ActionCopyNodeExecute(Sender: TObject);
     procedure ActionCopyNodePathAsTextExecute(Sender: TObject);
     procedure ActionCopyXmlAsTextExecute(Sender: TObject);
@@ -105,8 +108,6 @@ type
     procedure AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure PopupMenu1Popup(Sender: TObject);
-    procedure mnuAddAttributeClick(Sender: TObject);
-    procedure mnuRemoveAttributeClick(Sender: TObject);
     procedure PopupMenu3Popup(Sender: TObject);
     procedure TreeView1DragOver(Sender, Source: TObject; X, Y: Integer;
       State: TDragState; var Accept: Boolean);
@@ -136,6 +137,8 @@ type
 implementation
 
 {$R *.lfm}
+uses
+  Utils.Base64;
 
 constructor TFxmlView.Create(aOwner: TComponent);
 var
@@ -213,15 +216,30 @@ begin
 end;
 
 procedure TFxmlView.Save;
+  procedure SaveWithBackup;
+  var
+    s : string;
+  begin
+    s := XmlDoc.filename;
+    repeat
+      s := s + '.bak';
+    until not FileExists(s);
+    RenameFile(XmlDoc.filename, s);
+    XmlDoc.SaveToFile(XmlDoc.filename);
+  end;
+
 begin
-  if not FileExists(XmlDoc.filename) { *Converted from FileExists* } then
+  if not FileExists(XmlDoc.filename) then
   begin
     with SaveDialog1 do
       if Execute then
         XmlDoc.SaveToFile(Files[0]);
   end
   else
-    XmlDoc.SaveToFile(XmlDoc.filename);
+    if True {Config.Backup to be implemented} then
+      SaveWithBackup
+    else
+      XmlDoc.SaveToFile(XmlDoc.filename);
 end;
 
 procedure TFxmlView.mnuCopyMemoClick(Sender: TObject);
@@ -241,28 +259,6 @@ begin
     StatusBar1.SimpleText := 'Done.';
     Screen.Cursor := CrDefault;
   end;
-end;
-
-procedure TFxmlView.mnuAddAttributeClick(Sender: TObject);
-var
-  attr, val : string;
-begin
-  if Assigned(TreeView1.Selected.Data) then
-  begin
-    attr := InputBox('New attribute name', 'Type in new attribute name', '');
-    if attr <> '' then
-      val := InputBox('New attribute value', 'Type in new attribute value', '');
-
-    if val <> '' then
-    begin
-      TXmlElement(TreeView1.Selected.Data).AddAttrib(attr + '=' + val);
-      AttrGrid.Init(TXmlElement(TreeView1.Selected.Data));
-    end;
-  end;
-end;
-
-procedure TFxmlView.mnuRemoveAttributeClick(Sender: TObject);
-begin;
 end;
 
 procedure TFxmlView.PopupMenu1Popup(Sender: TObject);
@@ -295,6 +291,7 @@ end;
 procedure TFxmlView.TreeView1Change(Sender: TObject; Node: TTreeNode);
 var
   Ex: TXmlElement;
+  OldEvent : TNotifyEvent;
 begin
   if Assigned(TreeView1.Selected) then
     if Assigned(TreeView1.Selected.Data) then
@@ -322,7 +319,14 @@ begin
           end;
           // text
           if Ex.Text <> '' then
-            Memo1.Lines.Text := Ex.Text;
+          begin
+            Memo1.OnChange:=nil;
+            try
+               Memo1.Lines.Text := Ex.Text;
+            finally
+              Memo1.OnChange := Memo1Change;
+            end;
+          end;
         end;
     end;
 end;
@@ -678,6 +682,24 @@ end;
 procedure TFxmlView.ActionCopyNodeExecute(Sender: TObject);
 begin
   Clipboard.AsText := 'XMLNODE:'+inttostr(Integer(TreeView1.Selected.Data));
+end;
+
+procedure TFxmlView.ActionAddAttribExecute(Sender: TObject);
+var
+  attr, val : string;
+begin
+  if Assigned(TreeView1.Selected.Data) then
+  begin
+    attr := InputBox('New attribute name', 'Type in new attribute name', '');
+    if attr <> '' then
+      val := InputBox('New attribute value', 'Type in new attribute value', '');
+
+    if val <> '' then
+    begin
+      TXmlElement(TreeView1.Selected.Data).AddAttrib(attr + '=' + val);
+      AttrGrid.Init(TXmlElement(TreeView1.Selected.Data));
+    end;
+  end;
 end;
 
 procedure TFxmlView.AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;

@@ -12,9 +12,6 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls,
-{$ifdef MsWindows}
-  Messages,
-{$endif}
   Menus, ExtCtrls, Grids, ufxmlviewer;
 
 type
@@ -274,7 +271,8 @@ end;
 
 procedure TFXmlViewer.Copytoclipboard1Click(Sender: TObject);
 begin
-  Clipboard.AsText := ActiveXmlview.XmlDoc.AsString;
+  if Assigned(ActiveXmlview.XmlDoc.DocumentElement) then
+    Clipboard.AsText := ActiveXmlview.XmlDoc.AsString;
 end;
 
 procedure TFXmlViewer.DoLoad(data : int64);

@@ -76,3 +76,5 @@ precompiled binairies/OsX/XmlReaderOsX.app/Contents/MacOS/XmlReaderOsX
 XmlReader/*.exe
 /precompiled binairies/Linux/XmlReader
 /precompiled binairies/Linux/XmlReader.ini
+XmlDoc/backup/uxmldoc.pas
+XmlReader/XmlReader.exe
