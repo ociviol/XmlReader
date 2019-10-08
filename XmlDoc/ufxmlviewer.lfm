@@ -350,12 +350,10 @@ object FxmlView: TFxmlView
     left = 624
     top = 176
     object mnuAddAttribute: TMenuItem
-      Caption = 'Add attribute'
-      OnClick = mnuAddAttributeClick
+      Action = ActionAddAttrib
     end
     object mnuRemoveAttribute: TMenuItem
       Caption = 'Remove attribute'
-      OnClick = mnuRemoveAttributeClick
     end
   end
   object ActionList1: TActionList
@@ -400,6 +398,13 @@ object FxmlView: TFxmlView
     object ActionRenameNode: TAction
       Caption = 'Rename Node'
       OnExecute = ActionRenameNodeExecute
+    end
+    object ActionAddAttrib: TAction
+      Caption = 'Add Attribute'
+      OnExecute = ActionAddAttribExecute
+    end
+    object ActionDelAttrib: TAction
+      Caption = 'Remove Attribute'
     end
   end
 end

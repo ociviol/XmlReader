@@ -19,6 +19,8 @@ type
   { TFxmlView }
 
   TFxmlView = class(TFrame)
+    ActionDelAttrib: TAction;
+    ActionAddAttrib: TAction;
     ActionRenameNode: TAction;
     ActionDuplicateNode: TAction;
     ActionDeleteNode: TAction;
@@ -105,8 +107,6 @@ type
     procedure AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure PopupMenu1Popup(Sender: TObject);
-    procedure mnuAddAttributeClick(Sender: TObject);
-    procedure mnuRemoveAttributeClick(Sender: TObject);
     procedure PopupMenu3Popup(Sender: TObject);
     procedure TreeView1DragOver(Sender, Source: TObject; X, Y: Integer;
       State: TDragState; var Accept: Boolean);
@@ -136,6 +136,8 @@ type
 implementation
 
 {$R *.lfm}
+uses
+  Utils.Base64;
 
 constructor TFxmlView.Create(aOwner: TComponent);
 var
@@ -256,28 +258,6 @@ begin
     StatusBar1.SimpleText := 'Done.';
     Screen.Cursor := CrDefault;
   end;
-end;
-
-procedure TFxmlView.mnuAddAttributeClick(Sender: TObject);
-var
-  attr, val : string;
-begin
-  if Assigned(TreeView1.Selected.Data) then
-  begin
-    attr := InputBox('New attribute name', 'Type in new attribute name', '');
-    if attr <> '' then
-      val := InputBox('New attribute value', 'Type in new attribute value', '');
-
-    if val <> '' then
-    begin
-      TXmlElement(TreeView1.Selected.Data).AddAttrib(attr + '=' + val);
-      AttrGrid.Init(TXmlElement(TreeView1.Selected.Data));
-    end;
-  end;
-end;
-
-procedure TFxmlView.mnuRemoveAttributeClick(Sender: TObject);
-begin;
 end;
 
 procedure TFxmlView.PopupMenu1Popup(Sender: TObject);
@@ -701,6 +681,24 @@ end;
 procedure TFxmlView.ActionCopyNodeExecute(Sender: TObject);
 begin
   Clipboard.AsText := 'XMLNODE:'+inttostr(Integer(TreeView1.Selected.Data));
+end;
+
+procedure TFxmlView.ActionAddAttribExecute(Sender: TObject);
+var
+  attr, val : string;
+begin
+  if Assigned(TreeView1.Selected.Data) then
+  begin
+    attr := InputBox('New attribute name', 'Type in new attribute name', '');
+    if attr <> '' then
+      val := InputBox('New attribute value', 'Type in new attribute value', '');
+
+    if val <> '' then
+    begin
+      TXmlElement(TreeView1.Selected.Data).AddAttrib(attr + '=' + val);
+      AttrGrid.Init(TXmlElement(TreeView1.Selected.Data));
+    end;
+  end;
 end;
 
 procedure TFxmlView.AttrGridSelectCell(Sender: TObject; ACol, ARow: Integer;
