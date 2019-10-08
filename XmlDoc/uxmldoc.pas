@@ -901,6 +901,7 @@ begin
     end;
 
   until not Reader.ReadNextToken(Token);
+
 end;
 
 procedure TXMLElement.AddText(txt : String);
@@ -1376,7 +1377,7 @@ begin
   with result.ReaderSettings do
   begin
     ErrorHandling := ehRaise;
-    StrictXML := False;
+    StrictXML := True;
   end;
 end;
 

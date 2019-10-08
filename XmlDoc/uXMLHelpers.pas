@@ -18,7 +18,7 @@ uses
 
 const
   CS_DATASETS = 'DataSets';
-
+  CS_MAXLEN_TEXT = 30;
 
 type
   TXMLProgress = procedure(aMin, aMax, aPosition : Integer) of object;
@@ -309,6 +309,13 @@ begin
 end;
 }
 
+function MaxLengthText(const aText : string; MaxLen : integer):String;
+begin
+  result := aText;
+  if Length(Result) > MaxLen then
+    result := Copy(Result, 1, MaxLen) + '...';
+end;
+
 function MakeNodeText(aElement: TXmlElement): String;
 var
   theattribs: string;
@@ -317,8 +324,14 @@ begin
   result := aElement.TagName;
  // append attributes to name
   theattribs := aElement.Attribs;
+  if (theattribs <> '') or (aElement.Text <> '') then
+    result := result + ' (';
   if theattribs <> '' then
-    result := result + ' (' + theattribs + ')';
+    result := result + theattribs + ' ';
+  if aElement.Text <> '' then
+    result := result + 'Text=' + MaxLengthText(aElement.Text, CS_MAXLEN_TEXT);
+  if (theattribs <> '') or (aElement.Text <> '') then
+    result := result + ')';
 end;
   
 procedure TTreeView.AddTreeNodes(Elem: TXmlElement; ANode: TTreeNode; OnProgress : TXMLProgress = nil);
@@ -382,9 +395,14 @@ begin
 
         ss := zNode.TagName;
         attrib := zNode.Attribs;
+        if (attrib <> '') or (zNode.Text <> '') then
+          ss := ss + ' (';
         if attrib <> '' then
-          ss := ss + ' (' + attrib + ')';
-
+          ss := ss + attrib + ' ';
+        if zNode.Text <> '' then
+          ss := ss + 'Text=' + MaxLengthText(zNode.Text, CS_MAXLEN_TEXT);
+        if (attrib <> '') or (zNode.Text <> '') then
+          ss :=ss + ')';
         AddTreeNodes(zNode, AddChildObject(nil, ss, zNode), OnProgress);
         // expand
         ExpandTree(Items[0], 1);
