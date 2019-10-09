@@ -78,3 +78,4 @@ XmlReader/*.exe
 /precompiled binairies/Linux/XmlReader.ini
 XmlDoc/backup/uxmldoc.pas
 XmlReader/XmlReader.exe
+precompiled binairies/OsX/XmlReader.app/Contents/MacOS/XmlReader
