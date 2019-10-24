@@ -11,8 +11,8 @@ object FxmlView: TFxmlView
   ParentFont = False
   TabOrder = 0
   TabStop = True
-  DesignLeft = 279
-  DesignTop = 252
+  DesignLeft = 370
+  DesignTop = 235
   object Panel2: TPanel
     Left = 0
     Height = 526

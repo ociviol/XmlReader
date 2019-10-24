@@ -24,7 +24,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="2"/>
-      <BuildNr Value="17"/>
+      <BuildNr Value="18"/>
       <StringTable CompanyName="Ollivier Civiol" FileDescription="Xml Editor" InternalName="XmlReader" LegalCopyright="Ollivier Civiol 2014-2019" LegalTrademarks="Ollivier Civiol" OriginalFilename="XmlReader.exe" ProductName="XmlReader"/>
     </VersionInfo>
     <BuildModes Count="3">
@@ -132,7 +132,7 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="5">
+    <Units Count="6">
       <Unit0>
         <Filename Value="XmlReader.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -160,6 +160,14 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="Utils.Base64"/>
       </Unit4>
+      <Unit5>
+        <Filename Value="uabout.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmAbout"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uAbout"/>
+      </Unit5>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

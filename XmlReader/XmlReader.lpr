@@ -43,7 +43,7 @@ begin
  *)
   begin
     //CreateMutex(nil, False, 'CPXmlViewer');
-  Application.Scaled:=True;
+    Application.Scaled:=True;
     Application.Initialize;
     Application.Title := 'Simple XmlReader';
     Application.CreateForm(TFXmlViewer, FXmlViewer);
