@@ -24,9 +24,6 @@
         <TopLine Value="182"/>
         <CursorPos Y="216"/>
         <UsageCount Value="27"/>
-        <Bookmarks Count="1">
-          <Item0 X="8" Y="274" ID="1"/>
-        </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -37,13 +34,12 @@
         <ComponentName Value="FxmlView"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <TopLine Value="288"/>
-        <CursorPos X="40" Y="296"/>
+        <CursorPos Y="302"/>
         <UsageCount Value="27"/>
         <Bookmarks Count="1">
-          <Item0 Y="263" ID="2"/>
+          <Item0 Y="264" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -52,10 +48,14 @@
       <Unit3>
         <Filename Value="..\XmlDoc\uxmldoc.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="170"/>
-        <CursorPos Y="115"/>
+        <TopLine Value="998"/>
+        <CursorPos X="13" Y="1026"/>
         <UsageCount Value="27"/>
+        <Bookmarks Count="1">
+          <Item0 Y="1019" ID="1"/>
+        </Bookmarks>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
@@ -63,7 +63,7 @@
         <Filename Value="..\..\Utils\utils.base64.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Utils.Base64"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <CursorPos Y="26"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
@@ -76,7 +76,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uAbout"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <TopLine Value="9"/>
         <CursorPos X="24" Y="26"/>
         <UsageCount Value="20"/>
@@ -86,18 +86,20 @@
       </Unit5>
       <Unit6>
         <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
-        <EditorIndex Value="11"/>
-        <TopLine Value="414"/>
-        <CursorPos Y="430"/>
+        <EditorIndex Value="12"/>
+        <TopLine Value="319"/>
+        <CursorPos X="41" Y="398"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit6>
       <Unit7>
         <Filename Value="C:\lazarus\lcl\include\control.inc"/>
-        <TopLine Value="3621"/>
-        <CursorPos Y="3636"/>
+        <EditorIndex Value="8"/>
+        <TopLine Value="3405"/>
+        <CursorPos Y="3433"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit7>
       <Unit8>
         <Filename Value="C:\lazarus\lcl\include\wincontrol.inc"/>
@@ -108,7 +110,7 @@
       <Unit9>
         <Filename Value="C:\lazarus\lcl\grids.pas"/>
         <UnitName Value="Grids"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <TopLine Value="2622"/>
         <CursorPos Y="2649"/>
         <UsageCount Value="11"/>
@@ -159,7 +161,7 @@
       </Unit15>
       <Unit16>
         <Filename Value="C:\lazarus\lcl\include\customedit.inc"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <TopLine Value="91"/>
         <CursorPos X="32" Y="96"/>
         <UsageCount Value="11"/>
@@ -185,124 +187,123 @@
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
-        <Caret Line="296" TopLine="288"/>
+        <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
+        <Caret Line="352" Column="28" TopLine="318"/>
       </Position1>
       <Position2>
-        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
-        <Caret Line="302" TopLine="288"/>
+        <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
+        <Caret Line="353" Column="51" TopLine="319"/>
       </Position2>
       <Position3>
-        <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
-        <Caret Line="436" TopLine="402"/>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="124" Column="34" TopLine="122"/>
       </Position3>
       <Position4>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="2630" TopLine="2609"/>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="57" Column="15" TopLine="36"/>
       </Position4>
       <Position5>
-        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
-        <Caret Line="305" TopLine="288"/>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="1017" Column="25" TopLine="1016"/>
       </Position5>
       <Position6>
-        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
-        <Caret Line="296" TopLine="288"/>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="57" Column="31" TopLine="37"/>
       </Position6>
       <Position7>
-        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
-        <Caret Line="302" TopLine="288"/>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="1019" TopLine="998"/>
       </Position7>
       <Position8>
-        <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
-        <Caret Line="436" TopLine="402"/>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="1024" TopLine="998"/>
       </Position8>
       <Position9>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="2630" TopLine="2609"/>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="1019" TopLine="998"/>
       </Position9>
       <Position10>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="2638" TopLine="2618"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="305" TopLine="294"/>
       </Position10>
       <Position11>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="2640" TopLine="2618"/>
+        <Filename Value="..\XmlDoc\uxmldoc.pas"/>
+        <Caret Line="1024" TopLine="998"/>
       </Position11>
       <Position12>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="2643" TopLine="2618"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="742" Column="55" TopLine="736"/>
       </Position12>
       <Position13>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="2644" TopLine="2618"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="761" TopLine="720"/>
       </Position13>
       <Position14>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="2646" TopLine="2618"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
       </Position14>
       <Position15>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="2649" TopLine="2618"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="94" TopLine="61"/>
       </Position15>
       <Position16>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="3195" TopLine="3174"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="299" TopLine="276"/>
       </Position16>
       <Position17>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="3196" TopLine="3174"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="300" TopLine="276"/>
       </Position17>
       <Position18>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="3237" TopLine="3216"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="296" TopLine="276"/>
       </Position18>
       <Position19>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="3244" TopLine="3216"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="318" TopLine="297"/>
       </Position19>
       <Position20>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="3246" TopLine="3216"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="299" TopLine="291"/>
       </Position20>
       <Position21>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="3250" TopLine="3216"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="300" TopLine="291"/>
       </Position21>
       <Position22>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="3197" TopLine="3176"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="301" TopLine="291"/>
       </Position22>
       <Position23>
-        <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
-        <Caret Line="436" Column="17" TopLine="414"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="300" Column="43" TopLine="291"/>
       </Position23>
       <Position24>
-        <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
-        <Caret Line="423" TopLine="414"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="319" TopLine="291"/>
       </Position24>
       <Position25>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="2630" TopLine="2622"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="300" TopLine="291"/>
       </Position25>
       <Position26>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <Caret Line="2649" TopLine="2622"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="301" TopLine="291"/>
       </Position26>
       <Position27>
-        <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
-        <Caret Line="437" TopLine="414"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="296" TopLine="288"/>
       </Position27>
       <Position28>
-        <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
-        <Caret Line="436" Column="16" TopLine="414"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="300" TopLine="288"/>
       </Position28>
       <Position29>
-        <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
-        <Caret Line="428" TopLine="414"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="301" TopLine="288"/>
       </Position29>
       <Position30>
-        <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
-        <Caret Line="430" TopLine="414"/>
+        <Filename Value="..\XmlDoc\ufxmlviewer.pas"/>
+        <Caret Line="296" TopLine="288"/>
       </Position30>
     </JumpHistory>
     <RunParams>
@@ -311,13 +312,13 @@
     </RunParams>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="4">
+    <BreakPoints Count="5">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="..\XmlDoc\ufxmlviewer.pas"/>
-        <Line Value="501"/>
+        <Line Value="508"/>
       </Item1>
       <Item2>
         <Kind Value="bpkSource"/>
@@ -331,15 +332,22 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="..\XmlDoc\ufxmlviewer.pas"/>
-        <Line Value="351"/>
+        <Line Value="358"/>
       </Item3>
       <Item4>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="..\XmlDoc\ufxmlviewer.pas"/>
-        <Line Value="371"/>
+        <Line Value="378"/>
       </Item4>
+      <Item5>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\XmlDoc\uxmldoc.pas"/>
+        <Line Value="1024"/>
+      </Item5>
     </BreakPoints>
   </Debugging>
 </CONFIG>

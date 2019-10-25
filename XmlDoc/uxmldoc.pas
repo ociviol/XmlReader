@@ -54,7 +54,7 @@ type
     procedure SetElementValue(aValue : String);
     function  GetAttribs:String;
     function  GetLevel:Integer;
-    function  GetText:String; inline;
+    function  GetText:String;
     procedure SetText(aText : String);
     procedure DoBeforeNodeChange;
     procedure DoAfterNodeChange;

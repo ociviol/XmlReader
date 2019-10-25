@@ -66,6 +66,7 @@ object FxmlView: TFxmlView
         ReadOnly = True
         TabOrder = 0
         OnChange = TreeView1Change
+        OnChanging = TreeView1Changing
         OnDragDrop = TreeView1DragDrop
         OnDragOver = TreeView1DragOver
         Options = [tvoAutoItemHeight, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
@@ -173,7 +174,6 @@ object FxmlView: TFxmlView
           Width = 443
           Align = alClient
           Enabled = False
-          OnChange = Memo1Change
           ScrollBars = ssAutoBoth
           TabOrder = 3
         end

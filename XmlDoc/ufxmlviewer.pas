@@ -91,7 +91,6 @@ type
     procedure AttrGridEditingDone(Sender: TObject);
     procedure edtTagEnter(Sender: TObject);
     procedure edtTextEnter(Sender: TObject);
-    procedure Memo1Change(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure edtTagChange(Sender: TObject);
     procedure btnSearchTagClick(Sender: TObject);
@@ -102,6 +101,8 @@ type
     procedure edtSearchMemoEnter(Sender: TObject);
     procedure mnuCopyMemoClick(Sender: TObject);
     procedure PopupMenu2Popup(Sender: TObject);
+    procedure TreeView1Changing(Sender: TObject; Node: TTreeNode;
+      var AllowChange: Boolean);
     procedure TreeView1CustomDrawItem(Sender: TCustomTreeView; Node: TTreeNode;
       State: TCustomDrawState; var DefaultDraw: Boolean);
     procedure Wordwrap1Click(Sender: TObject);
@@ -288,10 +289,23 @@ begin
   mnuRemoveAttribute.Enabled := mnuAddAttribute.Enabled;
 end;
 
+procedure TFxmlView.TreeView1Changing(Sender: TObject; Node: TTreeNode;
+  var AllowChange: Boolean);
+var
+  Ex: TXmlElement;
+begin
+  if Assigned(TreeView1.Selected) then
+    if Assigned(TreeView1.Selected.Data) then
+    begin
+      Ex := TXmlElement(TreeView1.Selected.Data);
+      if Memo1.Text <> Ex.Text then
+        Ex.Text := Memo1.Text;
+    end;
+end;
+
 procedure TFxmlView.TreeView1Change(Sender: TObject; Node: TTreeNode);
 var
   Ex: TXmlElement;
-  OldEvent : TNotifyEvent;
 begin
   if Assigned(TreeView1.Selected) then
     if Assigned(TreeView1.Selected.Data) then
@@ -318,14 +332,7 @@ begin
         end;
         // text
         if Ex.Text <> '' then
-        begin
-          Memo1.OnChange:=nil;
-          try
-             Memo1.Lines.Text := Ex.Text;
-          finally
-            Memo1.OnChange := Memo1Change;
-          end;
-        end;
+          Memo1.Text := Ex.Text;
       end;
     end;
 end;
@@ -756,22 +763,6 @@ procedure TFxmlView.edtTextEnter(Sender: TObject);
 begin
   btnSearchTag.Default := False;
   btnSearchText.Default := True;
-end;
-
-procedure TFxmlView.Memo1Change(Sender: TObject);
-var
-  Ex: TXmlElement;
-begin
-  if Assigned(TreeView1.Selected) then
-  begin
-    Ex := TXmlElement(TreeView1.Selected.Data);
-    if ASsigned(Ex) then
-    begin
-      Ex.Text :=  Memo1.Text;
-      edtSearchMemo.Enabled := Ex.Text <> '';
-      btnSearchMemo.Enabled := Ex.Text <> '';
-    end;
-  end;
 end;
 
 end.
