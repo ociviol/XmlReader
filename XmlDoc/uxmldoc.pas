@@ -1340,7 +1340,7 @@ begin
     InitXML(aString);
     Clear;
     LoadData(x);
-    FModified := False;
+    FModified := True;
   finally
     Free;
   end;

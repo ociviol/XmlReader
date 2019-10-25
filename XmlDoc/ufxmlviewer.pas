@@ -153,6 +153,7 @@ begin
   AttrGrid.Selection := gr;
 
   FXmlDoc := TXMLDoc.Create;
+  FXmlDoc.CreateNewDocumentElement('Document');
   FillTreeView;
 end;
 
@@ -169,10 +170,11 @@ end;
 
 procedure TFxmlView.EnabledActions;
 begin
-  ActionMoveDown.Enabled:= (Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data)) and
-      (TXMLElement(TreeView1.Selected.Data).Index < TXMLElement(TreeView1.Selected.Data).Parent.NbElements-1);
+  ActionMoveDown.Enabled:= (Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) and
+                            Assigned(TreeView1.SelectedXml.Parent)) and
+      (TreeView1.SelectedXml.Index < TreeView1.SelectedXml.Parent.NbElements-1);
   ActionMoveUp.Enabled:=(Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data)) and
-                        (TXMLElement(TreeView1.Selected.Data).Index > 0);
+                        (TreeView1.SelectedXml.Index > 0);
 
   ActionRenameNode.Enabled := Assigned(TreeView1.Selected);
   ActionDuplicateNode.Enabled := Assigned(TreeView1.Selected);
@@ -297,7 +299,7 @@ begin
   if Assigned(TreeView1.Selected) then
     if Assigned(TreeView1.Selected.Data) then
     begin
-      Ex := TXmlElement(TreeView1.Selected.Data);
+      Ex := TreeView1.SelectedXml;
       if Memo1.Text <> Ex.Text then
         Ex.Text := Memo1.Text;
     end;
@@ -310,7 +312,7 @@ begin
   if Assigned(TreeView1.Selected) then
     if Assigned(TreeView1.Selected.Data) then
     begin
-      Ex := TXmlElement(TreeView1.Selected.Data);
+      Ex := TreeView1.SelectedXml;
 
       Memo1.Clear;
       AttrGrid.ClearGrid;
@@ -355,7 +357,7 @@ var
   end;
 
 begin
-  aElem := TXmlElement(TreeView1.Selected.Data);
+  aElem := TreeView1.SelectedXml;
   aDest := TXmlElement(TreeView1.GetNodeAt(X, Y).Data);
 
   XmlDoc.MoveElement(aElem, aDest);
@@ -534,7 +536,7 @@ var
 begin
   if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
   begin
-    Node := TXMLElement(TreeView1.Selected.Data);
+    Node := TreeView1.SelectedXml;
     Dad := Node.Parent;
     p := -1;
     for i:=0 to Dad.NbElements-1 do
@@ -561,7 +563,7 @@ begin
     s := ClipBoard.AsText;
     s := copy(s ,9, length(s));
     aNode := TXMLElement(StrToInt(s));
-    aNode := TXMLElement(Treeview1.Selected.Data).InsertNode(aNode);
+    aNode := TreeView1.SelectedXml.InsertNode(aNode);
     Node := TreeView1.Items.AddChildObject(Treeview1.Selected, aNode.TagName, aNode);
     TreeView1.AddTreeNodes(aNode, Node);
   finally
@@ -574,7 +576,7 @@ var
   aElem: TXmlElement;
   s: string;
 begin
-  aElem := TXmlElement(TreeView1.Selected.Data);
+  aElem := TreeView1.SelectedXml;
   s := InputBox('Rename node', 'Type a new name for the node', aElem.TagName);
   if s <> aElem.TagName then
   begin
@@ -590,7 +592,7 @@ var
 begin
   if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
   begin
-    Node := TXMLElement(TreeView1.Selected.Data);
+    Node := TreeView1.SelectedXml;
     Dad := Node.Parent;
     p := -1;
     for i:=0 to Dad.NbElements-1 do
@@ -615,7 +617,7 @@ procedure TFxmlView.ActionDeleteNodeExecute(Sender: TObject);
 var
   aElement: TXmlElement;
 begin
-  aElement := TXmlElement(TreeView1.Selected.Data);
+  aElement := TreeView1.SelectedXml;
   if Assigned(aElement) then
   begin
     TreeView1.Items.BeginUpdate;
@@ -633,7 +635,7 @@ var
   aElement, aNewElem: TXmlElement;
   ANode: TTreeNode;
 begin
-  aElement := TXmlElement(TreeView1.Selected.Data);
+  aElement := TreeView1.SelectedXml;
   if Assigned(aElement) then
   begin
     TreeView1.Items.BeginUpdate;
@@ -658,7 +660,7 @@ var
 begin
   if Assigned(TreeView1.Selected) then
   begin
-    aElement := TXmlElement(TreeView1.Selected.Data);
+    aElement := TreeView1.SelectedXml;
     with aElement, TreeView1 do
     begin
       aElement := aElement.AddChildNode('New');
@@ -702,8 +704,8 @@ begin
 
     if val <> '' then
     begin
-      TXmlElement(TreeView1.Selected.Data).AddAttrib(attr + '=' + val);
-      AttrGrid.Init(TXmlElement(TreeView1.Selected.Data));
+      TreeView1.SelectedXml.AddAttrib(attr + '=' + val);
+      AttrGrid.Init(TreeView1.SelectedXml);
     end;
   end;
 end;
@@ -714,7 +716,7 @@ begin
   CanSelect := Assigned(TreeView1.Selected);
   if CanSelect then
   begin
-    CanSelect := (TreeView1.SelectedXML.TagName <> 'xml');
+    CanSelect := Assigned(TreeView1.SelectedXML) and (TreeView1.SelectedXML.TagName <> 'xml');
     if aRow >0 then
       CanSelect := (AttrGrid.Cells[0, aRow] <> '')
   end;
