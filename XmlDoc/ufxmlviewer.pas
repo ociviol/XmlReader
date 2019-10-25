@@ -302,32 +302,31 @@ begin
       AttrGrid.ClearGrid;
       Memo1.Enabled := Assigned(Ex);
 
-      if TreeView1.Selected.Level > 1 then
-        if Assigned(Ex) and (TreeView1.Selected.Level > 0) then
+      if Assigned(Ex) then
+      begin
+        edtSearchMemo.Enabled := Ex.Text <> '';
+        btnSearchMemo.Enabled := Ex.Text <> '';
+        AttrGrid.Enabled := Ex.TagName <> 'xml';
+        // attribs
+        if Ex.NbAttributes > 0 then
         begin
-          edtSearchMemo.Enabled := Ex.Text <> '';
-          btnSearchMemo.Enabled := Ex.Text <> '';
-          AttrGrid.Enabled := Ex.TagName <> 'xml';
-          // attribs
-          if Ex.NbAttributes > 0 then
-          begin
-            pnlAttrib.Visible := True;
-            btnApply.Visible := True;
-            btnApply.Enabled := False;
+          pnlAttrib.Visible := True;
+          btnApply.Visible := True;
+          btnApply.Enabled := False;
 
-            AttrGrid.Init(Ex);
-          end;
-          // text
-          if Ex.Text <> '' then
-          begin
-            Memo1.OnChange:=nil;
-            try
-               Memo1.Lines.Text := Ex.Text;
-            finally
-              Memo1.OnChange := Memo1Change;
-            end;
+          AttrGrid.Init(Ex);
+        end;
+        // text
+        if Ex.Text <> '' then
+        begin
+          Memo1.OnChange:=nil;
+          try
+             Memo1.Lines.Text := Ex.Text;
+          finally
+            Memo1.OnChange := Memo1Change;
           end;
         end;
+      end;
     end;
 end;
 

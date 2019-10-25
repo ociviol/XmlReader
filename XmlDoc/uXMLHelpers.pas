@@ -433,8 +433,7 @@ end;
 
 procedure TStringGrid.ClearGrid;
 begin
-  FixedRows := 0;
-  RowCount := 0;
+  RowCount := 1;
   RowCount := 2;
   ColCount := 2;
   FixedCols := 1;
