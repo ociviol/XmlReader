@@ -11,8 +11,8 @@ object FxmlView: TFxmlView
   ParentFont = False
   TabOrder = 0
   TabStop = True
-  DesignLeft = 279
-  DesignTop = 252
+  DesignLeft = 370
+  DesignTop = 235
   object Panel2: TPanel
     Left = 0
     Height = 526
@@ -66,6 +66,7 @@ object FxmlView: TFxmlView
         ReadOnly = True
         TabOrder = 0
         OnChange = TreeView1Change
+        OnChanging = TreeView1Changing
         OnDragDrop = TreeView1DragDrop
         OnDragOver = TreeView1DragOver
         Options = [tvoAutoItemHeight, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
@@ -173,7 +174,6 @@ object FxmlView: TFxmlView
           Width = 443
           Align = alClient
           Enabled = False
-          OnChange = Memo1Change
           ScrollBars = ssAutoBoth
           TabOrder = 3
         end

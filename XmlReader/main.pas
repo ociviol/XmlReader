@@ -80,7 +80,7 @@ implementation
 {$R *.lfm}
 
 uses
-  Inifiles, Clipbrd, Utils.SoftwareVersion;
+  Inifiles, Clipbrd, Utils.SoftwareVersion, uAbout;
 { TFXmlViewer }
 
 function TFXmlViewer.GetActiveXmlView: TFxmlView;
@@ -271,8 +271,12 @@ end;
 
 procedure TFXmlViewer.About1Click(Sender: TObject);
 begin
-  ShowMessage(GetFileVersionInternalName + ' ' +
-              GetFileVersion + ' © ' + GetFileVersionCopyright);
+  with TfrmAbout.Create(Application) do
+  try
+    ShowModal;
+  finally
+    Free;
+  end;
 end;
 
 procedure TFXmlViewer.Copytoclipboard1Click(Sender: TObject);

@@ -1,0 +1,38 @@
+object frmAbout: TfrmAbout
+  Left = 629
+  Height = 68
+  Top = 423
+  Width = 433
+  Caption = 'About'
+  ClientHeight = 68
+  ClientWidth = 433
+  OnCreate = FormCreate
+  Position = poMainFormCenter
+  LCLVersion = '2.0.4.0'
+  object Label1: TLabel
+    Left = 0
+    Height = 15
+    Top = 10
+    Width = 433
+    Align = alTop
+    Alignment = taCenter
+    BorderSpacing.Top = 10
+    BorderSpacing.Bottom = 10
+    Caption = 'XmlReader'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Cursor = crHandPoint
+    Left = 8
+    Height = 15
+    Top = 40
+    Width = 419
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'WebSite'
+    Font.Color = clMenuHighlight
+    ParentColor = False
+    ParentFont = False
+    OnClick = Label2Click
+  end
+end
