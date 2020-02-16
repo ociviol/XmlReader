@@ -37,7 +37,7 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <TopLine Value="56"/>
-        <CursorPos X="59" Y="73"/>
+        <CursorPos X="18" Y="64"/>
         <UsageCount Value="27"/>
         <Bookmarks Count="2">
           <Item0 X="3" Y="703" ID="1"/>
@@ -58,6 +58,16 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
       <Unit4>
+        <Filename Value="..\..\Utils\utils.base64.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Utils.Base64"/>
+        <EditorIndex Value="7"/>
+        <CursorPos Y="26"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit4>
+      <Unit5>
         <Filename Value="..\XmlDoc\uXMLHelpers.pas"/>
         <EditorIndex Value="9"/>
         <TopLine Value="442"/>
@@ -65,39 +75,39 @@
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit4>
-      <Unit5>
+      </Unit5>
+      <Unit6>
         <Filename Value="C:\lazarus\lcl\include\control.inc"/>
         <TopLine Value="3621"/>
         <CursorPos Y="3636"/>
         <UsageCount Value="10"/>
-      </Unit5>
-      <Unit6>
+      </Unit6>
+      <Unit7>
         <Filename Value="C:\lazarus\lcl\include\wincontrol.inc"/>
         <TopLine Value="6304"/>
         <CursorPos Y="6319"/>
         <UsageCount Value="10"/>
-      </Unit6>
-      <Unit7>
+      </Unit7>
+      <Unit8>
         <Filename Value="C:\lazarus\lcl\grids.pas"/>
         <UnitName Value="Grids"/>
         <EditorIndex Value="10"/>
         <CursorPos Y="26"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
-      </Unit7>
-      <Unit8>
+      </Unit8>
+      <Unit9>
         <Filename Value="..\XmlDoc\VariantUtils.pas"/>
         <CursorPos X="26" Y="5"/>
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit8>
-      <Unit9>
+      </Unit9>
+      <Unit10>
         <Filename Value="C:\winprods\CAFE Shared - XE3\3P\Developer Express.VCL\Library\RS17\Win64\cxVer.inc"/>
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit9>
-      <Unit10>
+      </Unit10>
+      <Unit11>
         <Filename Value="..\XmlDoc\OXmlReadWrite.pas"/>
         <EditorIndex Value="3"/>
         <TopLine Value="1516"/>
@@ -105,22 +115,22 @@
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit10>
-      <Unit11>
+      </Unit11>
+      <Unit12>
         <Filename Value="..\XmlDoc\OBufferedStreams.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="34"/>
         <UsageCount Value="11"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit11>
-      <Unit12>
+      </Unit12>
+      <Unit13>
         <Filename Value="..\XmlDoc\OXmlSAX.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="214"/>
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit12>
-      <Unit13>
+      </Unit13>
+      <Unit14>
         <Filename Value="C:\lazarus\fpc\3.0.4\source\packages\fcl-base\src\inifiles.pp"/>
         <UnitName Value="IniFiles"/>
         <EditorIndex Value="5"/>
@@ -128,31 +138,21 @@
         <CursorPos X="17" Y="214"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
-      </Unit13>
-      <Unit14>
+      </Unit14>
+      <Unit15>
         <Filename Value="C:\lazarus\lcl\include\customedit.inc"/>
         <EditorIndex Value="8"/>
         <TopLine Value="91"/>
         <CursorPos Y="108"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
-      </Unit14>
-      <Unit15>
+      </Unit15>
+      <Unit16>
         <Filename Value="..\XmlDoc\OTextReadWrite.pas"/>
         <EditorIndex Value="2"/>
         <TopLine Value="702"/>
         <CursorPos X="53" Y="724"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
-      </Unit15>
-      <Unit16>
-        <Filename Value="..\..\Utils\utils.base64.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="Utils.Base64"/>
-        <EditorIndex Value="7"/>
-        <CursorPos Y="26"/>
-        <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit16>

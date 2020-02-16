@@ -47,7 +47,7 @@ type
     function GetAttributeValue(index : integer):string;
     function GetShortAttributeValue(index : integer):string;
 
-    function  GetNbElements:integer; inline;
+    function  GetNbElements:integer; {$ifdef RELEASE}inline;{$endif}
     function  GetNbAttributes:integer; inline;
     function  GetAttribList:String;
     function  GetElemValue:String; inline;
@@ -99,7 +99,7 @@ type
     procedure RemoveAttribute(AName: string); overload;
     procedure RemoveAttribute(index: integer); overload;
     function  GetAttributeStr(AName: string): string;
-    function  GetAttributeBool(AName: string): boolean;
+    function  GetAttributeBool(AName: string; vDefault : Boolean = False): boolean;
     //procedure GetAttributeHex(AName: string; var aArr: TArray<Byte>);
     function  GetAttributeInt(AName: string): Int64;
     procedure SetAttribute(AName: string; AValue: Variant);
@@ -500,11 +500,11 @@ begin
   result := FAttributes.Values[AName];
 end;
 
-function TXMLElement.GetAttributeBool(AName: string): boolean;
+function TXMLElement.GetAttributeBool(AName: string; vDefault : Boolean = False): boolean;
 var
   a: string;
 begin
-  result := false;
+  result := vDefault;
   a := FAttributes.Values[AName];
   if a <> '' then
     result := (a = '1') or (a = 'true');
@@ -1165,8 +1165,9 @@ end;
 function TXMLDoc.GetDocumentElement:TXMLElement;
 begin
   result := nil;
-  if FElement.NbElements > 0 then
-    result := TXMLElement(FElement.FElements[0]);
+  if FElement.NbElements = 0 then
+    CreateNewDocumentElement('xml');
+  result := TXMLElement(FElement.FElements[0]);
 end;
 
 procedure TXMLDoc.MoveElement(aElement, aNewParent : TXMLElement);
