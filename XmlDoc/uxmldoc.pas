@@ -40,7 +40,7 @@ type
     FParent : TXMLElement;
     FTokenType: TXMLReaderTokenType;
     function GetIndex: Integer;
-    procedure SetTagName(aName : String);
+    procedure SetTagName(const aName : String);
   protected
     function GetElement(index : integer):TXMLElement; overload;
     function GetAttribute(index : integer):string; overload;
@@ -51,11 +51,11 @@ type
     function  GetNbAttributes:integer; inline;
     function  GetAttribList:String;
     function  GetElemValue:String; inline;
-    procedure SetElementValue(aValue : String);
+    procedure SetElementValue(const aValue : String);
     function  GetAttribs:String;
     function  GetLevel:Integer;
     function  GetText:String;
-    procedure SetText(aText : String);
+    procedure SetText(const aText : String);
     procedure DoBeforeNodeChange;
     procedure DoAfterNodeChange;
     procedure DoOnAddChildNode(aChildNode : TXMLElement);
@@ -78,39 +78,41 @@ type
     destructor Destroy; override;
 
     procedure Assign(aElem : TXMLElement);
-    procedure AddText(txt : String);
+    procedure AddText(const txt : String);
     procedure Clear;
     procedure ClearChildren;
     function  FirstChild : TXMLElement;
     function  NextSibling : TXMLElement;
-    function  AddChildNode(aName : String):TXMLElement;
+    function  AddChildNode(const aName : String):TXMLElement;
     procedure DeleteChildNode(aNode : TXMLElement);
     function  InsertNode(aNode : TXMLElement):TXMLElement;
-    procedure SetValueByElement(aNodeName, aValue : String);
-    function  NodeByAttributeValue(ANodeName, AAttributeName, AValue: string):TXMLElement;
+    procedure SetValueByElement(const aNodeName, aValue : String);
+    function  NodeByAttributeValue(const aNodeName, AAttributeName, AValue: string):TXMLElement;
     procedure RemoveChild(aNode : TXMLElement);
-    function  SelectSingleNode(aNodeName : String):TXMLElement;
-    function  SelectNodes(aName : String) : TList;
+    function  SelectSingleNode(const aNodeName : String):TXMLElement;
+    function  SelectNodes(const aName : String) : TList;
     procedure SwapElements(aFirst, aSecond : Integer);
     // CP added functions
     function  GetAttributeName(index : integer):string; inline;
-    procedure AddAttrib(attr : String); inline;
-    function  GetAttribute(AName: string): variant; overload;
-    procedure RemoveAttribute(AName: string); overload;
+    procedure AddAttrib(const attr : String); inline;
+    function  GetAttribute(const AName: string): variant; overload;
+    procedure RemoveAttribute(const AName: string); overload;
     procedure RemoveAttribute(index: integer); overload;
-    function  GetAttributeStr(AName: string): string;
-    function  GetAttributeBool(AName: string; vDefault : Boolean = False): boolean;
-    //procedure GetAttributeHex(AName: string; var aArr: TArray<Byte>);
-    function  GetAttributeInt(AName: string): Int64;
-    procedure SetAttribute(AName: string; AValue: Variant);
-    procedure SetAttributeBool(AName: string; AValue: Boolean);
-    //procedure SetAttributeHex(AName: string; aArr : TArray<Byte>);
-    function  GetNode(aNodeName : String; bAutoCreate : Boolean = True):TXMLElement;
-    function  GetValueByElement(ANodeName: string; var AValue: string): boolean; overload;
-    function  GetValueByElement(ANodeName: string): string; overload;
-    function  GetElementByValue(AElementName, AValue: string): TXMLElement;
-    function  GetNodeByElementValue(ANodeName, AElementName, AValue: string; bAutoCreate : Boolean = True): TXMLElement;
-    function  GetNodeByAttributeValue(ANodeName, AAttributeName, AValue: string; bAutoCreate : Boolean = True): TXMLElement;
+    function  GetAttributeStr(const AName: string): string;
+    function  GetAttributeBool(const AName: string; vDefault : Boolean = False): boolean;
+    //procedure GetAttributeHex(const AName: string; var aArr: TArray<Byte>);
+    function  GetAttributeInt(const AName: string): Int64;
+    procedure SetAttribute(const AName: string; AValue: Variant);
+    procedure SetAttributeBool(const AName: string; AValue: Boolean);
+    procedure SetAttributeDate(const aName: String; const aValue: TDateTime);
+    function  GetAttributeDate(const AName: string; AValue: TDateTime):TDateTime;
+    //procedure SetAttributeHex(const AName: string; aArr : TArray<Byte>);
+    function  GetNode(const aNodeName : String; bAutoCreate : Boolean = True):TXMLElement;
+    function  GetValueByElement(const aNodeName: string; var AValue: string): boolean; overload;
+    function  GetValueByElement(const aNodeName: string): string; overload;
+    function  GetElementByValue(const AElementName, AValue: string): TXMLElement;
+    function  GetNodeByElementValue(const aNodeName, AElementName, AValue: string; bAutoCreate : Boolean = True): TXMLElement;
+    function  GetNodeByAttributeValue(const aNodeName, AAttributeName, AValue: string; bAutoCreate : Boolean = True): TXMLElement;
     // compare node structures
     function  Compare(AElement: TXMLElement): boolean;
 
@@ -162,7 +164,7 @@ type
   protected
     function  GetDocumentElement:TXMLElement;
     function  GetAsString:String;
-    procedure SetAsString(aString : String);
+    procedure SetAsString(const aString : String);
     function  GetElement:TXMLElement;
     function  GetomitXMLDeclaration:Boolean;
     procedure SetomitXMLDeclaration(aVal : Boolean);
@@ -173,14 +175,14 @@ type
     destructor  Destroy; override;
     procedure Clear;
 
-    function  CreateNewDocumentElement(aName : String):TXMLElement;
+    function  CreateNewDocumentElement(const aName : String):TXMLElement;
     procedure MoveElement(aElement, aNewParent : TXMLElement);
-    procedure loadXML(aXMLStr : String);
-    procedure LoadFromFile(afilename : String);
-    procedure SaveToFile(afilename : String);
+    procedure loadXML(const aXMLStr : String);
+    procedure LoadFromFile(const afilename : String);
+    procedure SaveToFile(const afilename : String);
     procedure SaveToStream(aStream : TStream; {bWriteBom : Boolean = True; }aOmitXMLDeclaration : boolean = False);
     procedure LoadFromStream(aStream : TStream);
-    function  GetNodeFromPath(aPath : String):TXMLElement;
+    function  GetNodeFromPath(const aPath : String):TXMLElement;
 
     property  DocumentElement : TXMLElement read GetDocumentElement;
     property  Element : TXMLElement read GetElement;
@@ -212,7 +214,8 @@ type
 
 implementation
 
-uses OTextReadWrite, VariantUtils;
+uses
+  OTextReadWrite, VariantUtils, DateUtils;
 
 {
 function TListEx.Getcount : Integer;
@@ -225,6 +228,78 @@ begin
   result := Items[index];
 end;
 }
+
+function _IsDateTime(aText : String): Boolean; {$ifdef O_INLINE} inline; {$endif}
+begin
+  result := False;
+  // is xmldatetime
+  if (length(aText) = 23) or (length(aText) = 19) then
+    result := (aText[5] = '-') and (aText[11] = 'T');
+end;
+
+function _IsDate(aText : String): Boolean; {$ifdef O_INLINE} inline; {$endif}
+begin
+  // 2015-12-31
+  result := False;
+  if length(aText) = 10 then
+  begin
+    result := (aText[5] = '-') and (aText[8] = '-');
+    if result then
+      try
+        strtoint(copy(aText, 1, 4));
+        strtoint(copy(aText, 6, 2));
+        strtoint(copy(aText, 9, 2));
+      except
+        result := False;
+      end;
+  end;
+end;
+
+function _XmlDateToDateTime(aXmlDate : String):TDateTime;
+var
+  sy, sm, sd, sh, smm, ss, sms : string;
+  y, m, d, h, mm, s, ms : word;
+begin
+  // i.e : 2015-01-01
+  sy := '';
+  sm := '';
+  sd := '';
+  sh := '';
+  smm := '';
+  ss := '';
+  sms := '';
+
+  if (length(aXmlDate) >= 10) and
+     (_IsDate(aXmlDate) or _IsDateTime(aXmlDate)) then
+  begin
+    sy  := copy(aXmlDate, 1, 4);
+    sm  := copy(aXmlDate, 6, 2);
+    sd  := copy(aXmlDate, 9, 2);
+  end;
+  // has time part
+  // i.e : 2015-01-01T00:00:00
+  if (length(aXmlDate) >= 19) and _IsDateTime(aXmlDate) then
+  begin
+    sh  := copy(aXmlDate, 12, 2);
+    smm := copy(aXmlDate, 15, 2);
+    ss  := copy(aXmlDate, 18, 2);
+  end;
+  // has milliseconds part
+  // i.e : 2015-01-01T00:00:00.000
+  // i.e : 2015-01-01T00:00:00.5
+  if (length(aXmlDate) > 19) and _IsDateTime(aXmlDate) then
+    sms := copy(aXmlDate, 21, 3);
+
+  y  := StrToIntDef(sy, 0);
+  m  := StrToIntDef(sm, 0);
+  d  := StrToIntDef(sd, 0);
+  h  := StrToIntDef(sh, 0);
+  mm := StrToIntDef(smm, 0);
+  s  := StrToIntDef(ss, 0);
+  ms := StrToIntDef(sms, 0);
+
+  Result := EncodeDateTime(y, m, d, h, mm, s, ms);
+end;
 
 constructor TXMLElement.Create;
 begin
@@ -351,7 +426,7 @@ begin
     result := Parent.FElements[i+1];
 end;
 
-function TXMLElement.AddChildNode(aName : String):TXMLElement;
+function TXMLElement.AddChildNode(const aName : String):TXMLElement;
 // aTokenType : TXMLReaderTokenType = rtOpenElement):TXMLElement;
 begin
   Felements.Add(TXMLElement.Create(FOwner, Self));
@@ -388,7 +463,7 @@ begin
   result.Assign(aNode)
 end;
 
-function TXMLElement.SelectSingleNode(aNodeName : String):TXMLElement;
+function TXMLElement.SelectSingleNode(const aNodeName : String):TXMLElement;
 var
   i : integer;
 begin
@@ -415,7 +490,7 @@ begin
     end;
 end;
 
-function TXMLElement.SelectNodes(aName : String) : TList;
+function TXMLElement.SelectNodes(const aName : String) : TList;
 var
   i : Integer;
 begin
@@ -436,7 +511,7 @@ begin
   Owner.SetModified(Self);
 end;
 
-function TXMLElement.GetAttribute(AName: string): variant;
+function TXMLElement.GetAttribute(const AName: string): variant;
 var
   s : String;
 begin
@@ -480,7 +555,7 @@ begin
       Delete(index);
 end;
 
-procedure TXMLElement.RemoveAttribute(AName: string);
+procedure TXMLElement.RemoveAttribute(const AName: string);
 var
   i : Integer;
 begin
@@ -494,13 +569,13 @@ begin
 
 end;
 
-function TXMLElement.GetAttributeStr(AName: string): string;
+function TXMLElement.GetAttributeStr(const AName: string): string;
 begin
   result := '';
   result := FAttributes.Values[AName];
 end;
 
-function TXMLElement.GetAttributeBool(AName: string; vDefault : Boolean = False): boolean;
+function TXMLElement.GetAttributeBool(const AName: string; vDefault : Boolean = False): boolean;
 var
   a: string;
 begin
@@ -511,7 +586,7 @@ begin
 end;
 
 {
-procedure TXMLElement.GetAttributeHex(AName: string; var aArr: TArray<Byte>);
+procedure TXMLElement.GetAttributeHex(const AName: string; var aArr: TArray<Byte>);
 const
   Convert: array['0'..'f'] of SmallInt =
     ( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,-1,-1,-1,-1,-1,-1,
@@ -541,7 +616,7 @@ begin
   end;
 end;
 
-procedure TXMLElement.SetAttributeHex(AName: string; aArr : TArray<Byte>);
+procedure TXMLElement.SetAttributeHex(const AName: string; aArr : TArray<Byte>);
 const
   Convert: array[0..15] of WideChar = '0123456789ABCDEF';
 var
@@ -558,40 +633,54 @@ begin
 end;
 }
 
-function TXMLElement.GetAttributeInt(AName: string): Int64;
+function TXMLElement.GetAttributeInt(const AName: string): Int64;
 begin
   result := VarToIntDef(FAttributes.Values[AName], 0);
 end;
 
-procedure TXMLElement.SetAttributeBool(AName: string; AValue: Boolean);
+procedure TXMLElement.SetAttributeBool(const AName: string; AValue: Boolean);
 begin
   if AValue then SetAttribute(AName, 'true')
             else SetAttribute(AName, 'false');
 end;
 
-function TXMLElement.GetNode(aNodeName : String; bAutoCreate : Boolean = True):TXMLElement;
+function TXMLElement.GetAttributeDate(const AName: string; AValue: TDateTime):TDateTime;
 begin
-  result := selectSingleNode(ANodeName);
-  if (result = nil) and (bAutoCreate) then
-    result := AddChildNode(ANodeName);
+  if _IsDateTime(GetAttributeStr(aName)) then
+    result := _XmlDateToDateTime(GetAttributeStr(aName))
+  else
+    result := AValue;
 end;
 
-function TXMLElement.GetValueByElement(ANodeName: string; var AValue: string): boolean;
+procedure TXMLElement.SetAttributeDate(const aName: String;
+  const aValue: TDateTime);
+begin
+  SetAttribute(aName, FormatDateTime('yyyy-mm-dd', aValue) + 'T' + FormatDateTime('hh":"nn":"ss.zzz', aValue));
+end;
+
+function TXMLElement.GetNode(const aNodeName : String; bAutoCreate : Boolean = True):TXMLElement;
+begin
+  result := selectSingleNode(aNodeName);
+  if (result = nil) and (bAutoCreate) then
+    result := AddChildNode(aNodeName);
+end;
+
+function TXMLElement.GetValueByElement(const aNodeName: string; var AValue: string): boolean;
 var
   n: TXMLElement;
 begin
-  n := selectSingleNode(ANodeName);
+  n := selectSingleNode(aNodeName);
   result := n <> nil;
   if result then AValue := n.text;
 end;
 
-function TXMLElement.GetValueByElement(ANodeName: string): string;
+function TXMLElement.GetValueByElement(const aNodeName: string): string;
 begin
   result := '';
-  GetValueByElement(ANodeName, result);
+  GetValueByElement(aNodeName, result);
 end;
 
-function TXMLElement.GetElementByValue(AElementName, AValue: string): TXMLElement;
+function TXMLElement.GetElementByValue(const AElementName, AValue: string): TXMLElement;
 var
   i: integer;
 begin
@@ -611,7 +700,7 @@ begin
   end;
 end;
 
-function TXMLElement.GetNodeByElementValue(ANodeName, AElementName, AValue: string; bAutoCreate : Boolean = True): TXMLElement;
+function TXMLElement.GetNodeByElementValue(const aNodeName, AElementName, AValue: string; bAutoCreate : Boolean = True): TXMLElement;
 var
   i: integer;
   n: TXMLElement;
@@ -629,13 +718,13 @@ begin
   end;
   if (result = nil) and bAutoCreate then
   begin
-    result := AddChildNode(ANodeName);
+    result := AddChildNode(aNodeName);
     n := result.GetNode(AElementName);
     n.Text := AValue;
   end;
 end;
 
-function TXMLElement.GetNodeByAttributeValue(ANodeName, AAttributeName, AValue: string; bAutoCreate : Boolean = True): TXMLElement;
+function TXMLElement.GetNodeByAttributeValue(const aNodeName, AAttributeName, AValue: string; bAutoCreate : Boolean = True): TXMLElement;
 var
   i: integer;
   n: TXMLElement;
@@ -653,7 +742,7 @@ begin
   end;
   if (result = nil) and bAutoCreate then
   begin
-    result := AddChildNode(ANodeName);
+    result := AddChildNode(aNodeName);
     result.SetAttribute(AAttributeName, AValue);
   end;
 end;
@@ -699,7 +788,7 @@ begin
   end;
 end;
 
-procedure TXMLElement.SetAttribute(AName: string; AValue: Variant);
+procedure TXMLElement.SetAttribute(const AName: string; AValue: Variant);
 var
   s : string;
 begin
@@ -716,7 +805,7 @@ begin
 end;
 
 
-procedure TXMLElement.SetValueByElement(aNodeName, aValue : String);
+procedure TXMLElement.SetValueByElement(const aNodeName, aValue : String);
 var
   i : integer;
 begin
@@ -730,7 +819,7 @@ begin
   AddChildNode(aNodeName).Text := aValue;
 end;
 
-function TXMLElement.NodeByAttributeValue(ANodeName, AAttributeName,
+function TXMLElement.NodeByAttributeValue(const aNodeName, AAttributeName,
   AValue: string): TXMLElement;
 var
   i,j : integer;
@@ -904,12 +993,12 @@ begin
 
 end;
 
-procedure TXMLElement.AddText(txt : String);
+procedure TXMLElement.AddText(const txt : String);
 begin
   FText := StringReplace(txt, #13#13#10, #13#10, [rfReplaceAll]);
 end;
 
-procedure TXMLElement.SetTagName(aName : String);
+procedure TXMLElement.SetTagName(const aName : String);
 begin
   if FTagName <> aName then
   begin
@@ -1019,7 +1108,7 @@ begin
   result := Trim(FText);
 end;
 
-procedure TXMLElement.SetText(aText : String);
+procedure TXMLElement.SetText(const aText : String);
 begin
   DoBeforeNodeChange;
   if FText <> aText then
@@ -1101,7 +1190,7 @@ begin
   result := Trim(Text);
 end;
 
-procedure TXMLElement.SetElementValue(aValue : String);
+procedure TXMLElement.SetElementValue(const aValue : String);
 begin
   Text := aValue;
 end;
@@ -1118,7 +1207,7 @@ begin
 end;
 }
 
-procedure TXMLElement.AddAttrib(attr : String);
+procedure TXMLElement.AddAttrib(const attr : String);
 begin
   FAttributes.Add(attr);
 end;
@@ -1154,7 +1243,7 @@ begin
   FElement.Clear;
 end;
 
-function TXMLDoc.CreateNewDocumentElement(aName : String):TXMLElement;
+function TXMLDoc.CreateNewDocumentElement(const aName : String):TXMLElement;
 begin
   if FElement.NbElements > 0 then
     FElement.ClearChildren;
@@ -1206,7 +1295,7 @@ begin
   end;
 end;
 
-procedure TXMLDoc.LoadFromFile(afilename : String);
+procedure TXMLDoc.LoadFromFile(const afilename : String);
 var
   x : TXMLReader;
 begin
@@ -1223,7 +1312,7 @@ begin
   end;
 end;
 
-procedure TXMLDoc.loadXML(aXMLStr : String);
+procedure TXMLDoc.loadXML(const aXMLStr : String);
 begin
   AsString := aXMLStr;
   FModified := False;
@@ -1251,7 +1340,7 @@ begin
   end;
 end;
 
-procedure TXMLDoc.SaveToFile(afilename : String);
+procedure TXMLDoc.SaveToFile(const afilename : String);
 var
   x : TXMLWriter;
 begin
@@ -1290,7 +1379,7 @@ begin
   end;
 end;
 
-function TXMLDoc.GetNodeFromPath(aPath : String):TXMLElement;
+function TXMLDoc.GetNodeFromPath(const aPath : String):TXMLElement;
 var
   List: TStrings;
   i : integer;
@@ -1331,7 +1420,7 @@ begin
   end;
 end;
 
-procedure TXMLDoc.SetAsString(aString : String);
+procedure TXMLDoc.SetAsString(const aString : String);
 var
   x : TXMLReader;
 begin
